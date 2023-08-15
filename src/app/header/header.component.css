@@ -1,0 +1,34 @@
+header {
+    background-color: white;
+    padding: 0;
+    border-bottom: 1px solid rgb(193, 71, 193);
+}
+
+a {
+    color: rgb(193, 71, 193);
+}
+
+a:hover {
+    background-color: rgb(193, 71, 193);
+    color: white;
+}
+.container{
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+a.logo {
+    font-family: bold;
+    padding: 1rem;
+}
+
+nav ul{
+    list-style-type: none;
+    margin: 0;
+}
+
+nav ul li a{
+    padding: 1rem;
+    display: inline-block;
+}
