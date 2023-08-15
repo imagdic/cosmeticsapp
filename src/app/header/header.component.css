@@ -19,7 +19,7 @@ a:hover {
 }
 
 a.logo {
-    font-family: bold;
+    font-weight: bold;
     padding: 1rem;
 }
 
