@@ -10,6 +10,8 @@ import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { WishlistPageComponent } from './wishlist-page/wishlist-page.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { DialogModule } from 'primeng/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     AppRoutingModule,
     RatingModule,
     FormsModule,
-    ButtonModule
+    ButtonModule,
+    DialogModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

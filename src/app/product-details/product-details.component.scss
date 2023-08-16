@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    display: flex;
+    margin: 3rem;
+}
+
+.container > *{
+    min-width: 15rem;
+    max-width: 15rem;
+}
+
+img{
+    border-radius: 3rem;
+    flex: 1 0;
+    object-fit: cover;
+    height: 30rem;
+}
