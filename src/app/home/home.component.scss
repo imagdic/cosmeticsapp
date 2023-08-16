@@ -28,8 +28,8 @@
   }
 
   ul li a{
-    height: 20rem;
-    width: 20 rem;
+    height: 15rem;
+    width: 15rem;
     border: 1px solid whitesmoke;
     border-radius: 1rem;
     margin: 0.5rem;
@@ -43,4 +43,59 @@ li a:hover{
     opacity: 0.9;
     cursor: pointer;
 }
+
+.content{
+  padding: .5rem 1rem;
+  position: relative;
+}
+
+//heart icon
+.favorite{
+  position: absolute;
+  top: .3rem;
+  right: 1rem;
+}
+::ng-deep {
+  .pi-heart{
+    color: pink;
+  }
+
+  .pi-heart:hover {
+    color: purple!important;
+}
+}
+
+//star icon
+.star{
+  margin-bottom: .2rem;
+  margin-top: .4rem;
+}
+
+.product-item-footer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category{
+  flex: 9;
+  border-radius: 2rem;
+  color: #6e6e6e;
+  font-size: .9rem;
+  margin-right: .3rem;
+  display: inline-block;
+}
+
+.price{
+  flex: 1;
+  border-radius: 2rem;
+  color: #6e6e6e;
+  font-size: .9rem;
+  display: inline-block;
+}
+
+
+
+
+
 

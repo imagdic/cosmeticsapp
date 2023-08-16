@@ -1,12 +1,21 @@
 <ul class="image-grid">
     <li *ngFor="let product of products">
-        <a><img src="{{product.imageUrl}}" alt="product images"></a>
+        <a routerLink="/product/{{product.id}}"><img src="{{product.imageUrl}}" alt="product images"></a>
         <div class="content">
             <div class="name">
                 {{product.name}}
             </div>
-            <span class="favorite {{product.favorite?'':'not'}}">♡</span>
-            
+            <div class="favorite">
+                <p-button icon="pi pi-heart" styleClass="p-button-rounded p-button-help p-button-text p-button-raised"></p-button>
+            </div>
+            <div class="star">
+                <p-rating [(ngModel)]="product.rating" [cancel]="false"></p-rating>
+            </div>
+            <div class="product-item-footer">
+                <div class="category">{{product.brand}} | {{product.category}}
+                </div>
+                <div class="price">{{product.price | currency:'EUR'}}</div>
+            </div>
         </div>
     </li>
 </ul>

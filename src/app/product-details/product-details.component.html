@@ -1,0 +1,22 @@
+<div class="container">
+    <img [src]="product.imageUrl" [alt]="product.name">
+</div>
+<div class="details">
+    <div class="header">
+        <span class="name">
+            {{product.name}}
+        </span>
+        <span class="favorite">
+            <p-button icon="pi pi-heart" styleClass="p-button-rounded p-button-help p-button-text p-button-raised"></p-button>
+        </span>
+        <div class="star">
+            <p-rating [(ngModel)]="product.rating" [cancel]="false"></p-rating>
+        </div>
+        <div class="product-item-footer">
+            <div class="description">{{product.description}}</div>
+            <div class="category">Category: {{product.category}}
+            </div>
+            <div class="price">{{product.price | currency:'EUR'}}</div>
+        </div>
+    </div>
+</div>

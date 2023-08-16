@@ -5,15 +5,27 @@ import { Products } from '../shared/products';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
   products: Products[]=[];
+  rating: number = 0;
+  favorite: boolean = false;
 
-  constructor (private productsService: ProductsService) {  }
+  constructor (private productsService: ProductsService) {
+    this.products.forEach(product => {
+      product.rating = this.rating; // Inicijalna ocjena za svaki proizvod
+    });
+  }
 
   ngOnInit(): void {
-    this.products = this.productsService.getAll();
+    this.products = this.productsService.getProducts();
+    this.loadProducts();
+    
+  }
+
+  loadProducts() {
+    this.products = this.productsService.getProducts();
   }
 
 }
