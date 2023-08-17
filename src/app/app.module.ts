@@ -12,6 +12,7 @@ import { WishlistPageComponent } from './wishlist-page/wishlist-page.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { DialogModule } from 'primeng/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToggleButtonModule } from 'primeng/togglebutton';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     ButtonModule,
     DialogModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ToggleButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

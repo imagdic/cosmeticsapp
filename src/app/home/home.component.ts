@@ -11,12 +11,14 @@ export class HomeComponent implements OnInit {
   products: Products[]=[];
   rating: number = 0;
   favorite: boolean = false;
+  checked: boolean = false;
 
   constructor (private productsService: ProductsService) {
     this.products.forEach(product => {
       product.rating = this.rating; // Inicijalna ocjena za svaki proizvod
     });
   }
+  
 
   ngOnInit(): void {
     this.products = this.productsService.getProducts();
@@ -27,5 +29,6 @@ export class HomeComponent implements OnInit {
   loadProducts() {
     this.products = this.productsService.getProducts();
   }
+  
 
 }
