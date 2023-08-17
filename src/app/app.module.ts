@@ -13,6 +13,7 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { DialogModule } from 'primeng/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToggleButtonModule } from 'primeng/togglebutton';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
     ButtonModule,
     DialogModule,
     BrowserAnimationsModule,
-    ToggleButtonModule
+    ToggleButtonModule,
+    TableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
