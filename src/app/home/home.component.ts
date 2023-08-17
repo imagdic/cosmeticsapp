@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../services/products.service';
 import { Products } from '../shared/products';
+import { WishlistService } from '../services/wishlist.service';
 
 @Component({
   selector: 'app-home',
@@ -13,10 +14,14 @@ export class HomeComponent implements OnInit {
   favorite: boolean = false;
   checked: boolean = false;
 
-  constructor (private productsService: ProductsService) {
+  constructor (private productsService: ProductsService, private wishlistService: WishlistService) {
     this.products.forEach(product => {
       product.rating = this.rating; // Inicijalna ocjena za svaki proizvod
     });
+  }
+
+  addToWishlist(product: Products) {
+    this.wishlistService.addToWishlist(product);
   }
   
 

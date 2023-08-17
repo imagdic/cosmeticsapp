@@ -1,1 +1,7 @@
-<p>wishlist-page works!</p>
+<div *ngFor="let product of wishlist$ | async">
+    <h3>{{ product.name }}</h3>
+    <p-button icon="pi pi-times" styleClass="p-button-rounded p-button-danger p-button-outlined" 
+    (click)="removeFromWishlist(product)"></p-button>
+</div>
+
+  
