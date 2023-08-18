@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./wishlist-page.component.scss']
 })
 export class WishlistPageComponent {
-  wishlist$: Observable<Products[]>; // Pretpostavljamo da koristite Observable
+  wishlist$: Observable<Products[]>;
 
   constructor(private wishlistService: WishlistService) {
     this.wishlist$ = this.wishlistService.wishlist$;

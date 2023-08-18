@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "cosmeticsapp-e222f": {
+      "hosting": {
+        "cosmeticsapp": [
+          "cosmeticsapp-e222f"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "cosmeticsapp-e222f"
+  }
+}

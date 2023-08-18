@@ -1,24 +1,23 @@
 <div *ngFor="let product of wishlist$ | async">
-    <ul class="image-grid">
-        <li>
+    <table class="image-grid">
+        <tr>
             <a routerLink="/product/{{product.id}}"><img src="{{product.imageUrl}}" alt="product images"></a>
             <div class="content">
-                <div class="name">
+                <td class="name">
                     {{product.name}}
-                </div>
-                <div class="star">
+                </td>
+                <td class="star">
                     <p-rating [(ngModel)]="product.rating" [cancel]="false"></p-rating>
-                </div>
+                </td>
                 <div class="product-item-footer">
-                    <div class="category">{{product.brand}} | {{product.category}}
-                    </div>
-                    <div class="price">{{product.price | currency:'EUR'}}</div>
+                    <td class="category">{{product.brand}} | {{product.category}}
+                    </td>
+                    <td class="price">{{product.price | currency:'EUR'}}</td>
                 </div>
             </div>
-            <p-button icon="pi pi-times" styleClass="p-button-rounded p-button-danger p-button-outlined" 
-    (click)="removeFromWishlist(product)"></p-button>
-        </li>
-    </ul>
+            <td><p-button icon="pi pi-times" styleClass="p-button-rounded p-button-danger p-button-outlined" 
+    (click)="removeFromWishlist(product)"></p-button></td>
+    </table>
 </div>
 
   
