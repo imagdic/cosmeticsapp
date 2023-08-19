@@ -21,6 +21,10 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AuthService } from './services/auth.service';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
 @NgModule({
   declarations: [
@@ -42,13 +46,16 @@ import { RegistrationComponent } from './registration/registration.component';
     BrowserAnimationsModule,
     ToggleButtonModule,
     TableModule,
+    AngularFireModule,
+    AngularFireAuthModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore())
   ],
   providers: [
-    ScreenTrackingService,UserTrackingService
+    ScreenTrackingService,UserTrackingService, AuthService,
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
   ],
   bootstrap: [AppComponent]
 })
