@@ -4,16 +4,17 @@
         <div class="col-4">
             <div class="card shadow">
                 <div class="card-body">
+                    <div class="text-900 text-3xl font-medium mb-3">Welcome Back</div>
                     <form>
                         <div class="mb-3">
                             <label>Email</label>
-                            <input type="email"> 
+                            <input type="text" pInputText formControlName="text"/>
                         </div>
                         <div class="mb-3">
                             <label>Password</label>
-                            <input type="password">
+                            <p-password  [toggleMask]="true"></p-password>
                         </div>
-                        <button type="submit">Login</button>  
+                        <p-button label="Login" [loading]="loading" (onClick)="load()"></p-button>  
                         <div class="row">
                             <div class="col-md-6">
                                 <a href="/register">Need account? <span>Register here</span></a>

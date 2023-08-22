@@ -25,6 +25,9 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AuthService } from './services/auth.service';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { ReactiveFormsModule } from '@angular/forms';
+import { PasswordModule } from 'primeng/password';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   declarations: [
@@ -46,6 +49,9 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
     BrowserAnimationsModule,
     ToggleButtonModule,
     TableModule,
+    InputTextModule,
+    PasswordModule,
+    ReactiveFormsModule,
     AngularFireModule,
     AngularFireAuthModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),

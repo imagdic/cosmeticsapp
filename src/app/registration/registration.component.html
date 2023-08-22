@@ -1,0 +1,31 @@
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col"></div>
+        <div class="col-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="text-900 text-3xl font-medium mb-3">Welcome Back</div>
+                    <form>
+                        <div class="mb-3">
+                            <label>Email</label>
+                            <input type="text" pInputText formControlName="text"/>
+                        </div>
+                        <div class="mb-3">
+                            <label>Password</label>
+                            <p-password  [toggleMask]="true"></p-password>
+                        </div>
+                        <p-button label="Register" [loading]="loading" (onClick)="load()"></p-button>  
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a href="/login">Already have an account? <span>Login here</span></a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="">Forgot password? <span>Change password here</span></a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
