@@ -28,6 +28,7 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
+import {StyleClassModule} from 'primeng/styleclass';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { InputTextModule } from 'primeng/inputtext';
     ToggleButtonModule,
     TableModule,
     InputTextModule,
+    StyleClassModule,
     PasswordModule,
     ReactiveFormsModule,
     AngularFireModule,

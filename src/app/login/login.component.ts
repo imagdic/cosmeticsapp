@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { user } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-login',
@@ -8,37 +10,37 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  email: string = '';
-  password: string = '';
 
-  constructor(private authService: AuthService) { }
-  ngOnInit(): void {
+  loginForm = this.fb.group({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required])
+  })
 
+  constructor(private authService: AuthService, private fb: FormBuilder, private router: Router) { }
+  ngOnInit(): void {}
+
+  loginWithGoogle(){
+    this.authService.loginWithGoogle().then((res: any) =>{
+      this.router.navigateByUrl('/')
+    }).catch((error: any) =>{
+      console.error(error);
+    })
   }
 
-  login() {
-    if (this.email == '') {
-      alert('Please enter email');
-      return;
-    }
-
-    if (this.password == '') {
-      alert('Please enter password');
-      return;
-    }
-
-    this.authService.login(this.email, this.password);
-    this.email = '';
-    this.password = '';
+  loginWithEmail() {
+    console.log(this.loginForm.value);
+  
+    const email = this.loginForm.value.email!;
+    const password = this.loginForm.value.password!;
+  
+    this.authService.login({ email, password })
+      .then((res: any) => {
+        this.router.navigateByUrl('/');
+      })
+      .catch((error: any) => {
+        console.error(error);
+        alert('Something went wrong');
+        this.router.navigate(['/login']);
+      });
   }
-
-  loading: boolean = false;
-
-    load() {
-        this.loading = true;
-
-        setTimeout(() => {
-            this.loading = false
-        }, 1500);
-    }
 }

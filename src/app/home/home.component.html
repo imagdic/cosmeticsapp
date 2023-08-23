@@ -1,3 +1,4 @@
+<p-button (click)="logout()">Logout</p-button>
 <ul class="image-grid">
     <li *ngFor="let product of products">
         <a routerLink="/product/{{product.id}}"><img src="{{product.imageUrl}}" alt="product images"></a>

@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 @import "primeicons/primeicons.css";
+@import "primeflex/primeflex.css";
 
 *{
     box-sizing: border-box;
@@ -8,10 +9,11 @@ html {
     font-size: 16px;
 }
 
-body{
+body {
     margin: 0;
-    font-family: Quicksand, Helvetica, sans-serif;
-    font-size: 18px;
+    font-family: var(--font-family);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 a{

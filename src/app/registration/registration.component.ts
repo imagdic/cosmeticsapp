@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -8,37 +10,31 @@ import { AuthService } from '../services/auth.service';
 })
 export class RegistrationComponent {
 
-  email: string = '';
-  password: string = '';
+  registerForm = this.fb.group({
+    username: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required])
+  })
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private fb: FormBuilder, private router: Router) { }
   ngOnInit(): void {
 
   }
 
-  register() {
-    if (this.email == '') {
-      alert('Please enter email');
-      return;
-    }
-
-    if (this.password == '') {
-      alert('Please enter password');
-      return;
-    }
-
-    this.authService.register(this.email, this.password);
-    this.email = '';
-    this.password = '';
+  registerWithEmail() {
+    console.log(this.registerForm.value);
+  
+    const email = this.registerForm.value.email!;
+    const password = this.registerForm.value.password!;
+  
+    this.authService.register({ email, password })
+      .then((res: any) => {
+        this.router.navigateByUrl('/');
+      })
+      .catch((error: any) => {
+        console.error(error);
+        alert('Something went wrong');
+        this.router.navigate(['/login']);
+      });
   }
-
-    loading: boolean = false;
-
-    load() {
-        this.loading = true;
-
-        setTimeout(() => {
-            this.loading = false
-        }, 1500);
-    }
 }

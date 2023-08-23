@@ -17,32 +17,26 @@ export class AuthService {
     }
 
     //login method
-    login(email: string, password: string){
-        this.fireauth.signInWithEmailAndPassword(email, password).then( () => {
+    login(user: { email: string, password: string }): Promise<void> {
+        return this.fireauth.signInWithEmailAndPassword(user.email, user.password)
+          .then(() => {
             localStorage.setItem('token', 'true');
-            this.router.navigate(['/'])
-        }, err => {
-            alert('Something went wrong');
-            this.router.navigate(['/login']);
-        })
-    }
+          });
+      }
 
     //register method
-    register(email: string, password: string){
-        this.fireauth.createUserWithEmailAndPassword(email, password).then( () => {
-            alert('Registration successful')
-            this.router.navigate(['/login']);
-        }, err => {
-            alert('Something went wrong');
-            this.router.navigate(['/register']);
-        })
-    }
+    register(user: { email: string, password: string }): Promise<void> {
+        return this.fireauth.createUserWithEmailAndPassword(user.email, user.password)
+          .then(() => {
+            alert('Registration successful');
+          });
+      }
 
     //sign out
     logout(){
         this.fireauth.signOut().then( () => {
             localStorage.removeItem('token');
-            this.router.navigate(['/']);
+            this.router.navigate(['/login']);
         }, err => {
             alert(err.message);
         })
