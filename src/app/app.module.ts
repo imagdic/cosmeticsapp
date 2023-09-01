@@ -23,6 +23,7 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AuthService } from './services/auth.service';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -55,6 +56,7 @@ import {StyleClassModule} from 'primeng/styleclass';
     PasswordModule,
     ReactiveFormsModule,
     AngularFireModule,
+    AngularFirestoreModule,
     AngularFireAuthModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),

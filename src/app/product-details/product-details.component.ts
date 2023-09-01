@@ -12,10 +12,10 @@ import { WishlistService } from '../services/wishlist.service';
 export class ProductDetailsComponent implements OnInit{
   product!:Products;
   constructor(private activatedRoute: ActivatedRoute, private productService: ProductsService, private wishlistService: WishlistService) {
-    activatedRoute.params.subscribe((params)=>{
-      if(params['id'])
-      this.product = productService.getProductById(params['id']) 
-    })
+    // activatedRoute.params.subscribe((params)=>{
+    //   if(params['id'])
+    //   this.product = productService.getProductById(params['id']) 
+    // })
   }
 
   addToWishlist(product: Products) {
