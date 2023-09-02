@@ -4,7 +4,17 @@
         <nav>
             <ul>
                 <li>
-                    <a href="" routerLink="/wishlist">Wishlist</a>
+                    <div class="dropdown" (click)="toggleDropdown()">
+                        <p-button>User</p-button>
+                        <div id="myDropdown" class="dropdown-content" [ngClass]="{'show': isDropdownOpen}">
+                            <div><div *ngIf="user">
+                                <p>{{ user.email }}</p>
+                              </div></div>
+                            <a href="" routerLink="/wishlist">Wishlist</a>
+                            <a href=""><p-button (click)="logout()">Logout</p-button></a>
+                        </div>
+                      </div>
+                    
                 </li>
             </ul>
         </nav>
