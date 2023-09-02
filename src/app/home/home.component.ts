@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
 
   constructor (private productsService: ProductsService, private wishlistService: WishlistService, private authService: AuthService,
     private db: AngularFirestore,  private firestoreService: FirestoreService) {
+
     this.products.forEach(product => {
       product.rating = this.rating; // Inicijalna ocjena za svaki proizvod
     });
@@ -67,7 +68,7 @@ export class HomeComponent implements OnInit {
     
     //this.products = this.productsService.getProducts();
     //this.loadProducts();
-    this.productsService.getProducts().subscribe((data: Products[]) => {
+     this.productsService.getProducts().subscribe((data: Products[]) => {
       this.products = data;
       console.log(data);
     });

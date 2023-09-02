@@ -1,22 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Products } from '../shared/products';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Products } from '../shared/products';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
-
   constructor(private firestore: AngularFirestore) { }
 
   getProducts(): Observable<Products[]> {
+    // Fetch the products from Firestore with image URLs
     return this.firestore.collection<Products>('products').valueChanges();
   }
-
-  // getProductById(id:number): Products{
-  //   return this.getProducts().find(product => product.id == id)!;
-  // }
-
-
 }
