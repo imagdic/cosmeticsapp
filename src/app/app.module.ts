@@ -30,6 +30,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
 import {StyleClassModule} from 'primeng/styleclass';
+import { TieredMenuModule } from 'primeng/tieredmenu';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import {StyleClassModule} from 'primeng/styleclass';
     TableModule,
     InputTextModule,
     StyleClassModule,
+    TieredMenuModule,
     PasswordModule,
     ReactiveFormsModule,
     AngularFireModule,

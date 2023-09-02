@@ -4,6 +4,26 @@
         <nav>
             <ul>
                 <li>
+                    <div class="card flex justify-content-center">
+                        <span class="profile-link" (click)="menu.toggle($event)">Profile</span>
+                        <p-tieredMenu #menu [model]="items" [popup]="true"></p-tieredMenu>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+<!-- <header>
+    <div class="container">
+        <a href="#" routerLink="/" class="logo">Croatian Cosmetics</a>
+        <nav>
+            <ul>
+                <li>
                     <div class="dropdown" (click)="toggleDropdown()">
                         <p-button>User</p-button>
                         <div id="myDropdown" class="dropdown-content" [ngClass]="{'show': isDropdownOpen}">
@@ -19,4 +39,4 @@
             </ul>
         </nav>
     </div>
-</header>
+</header> -->

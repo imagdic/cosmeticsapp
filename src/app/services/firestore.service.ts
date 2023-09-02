@@ -10,7 +10,12 @@ export class FirestoreService {
   constructor(private firestore: AngularFirestore, private afAuth: AngularFireAuth) { }
 
   addUserToFirestore(uid: string, userData: any) {
-    return this.firestore.collection('users').doc(uid).set(userData);
+    const { email, username } = userData;
+  
+    return this.firestore.collection('users').doc(uid).set({
+      email,
+      username
+    });
   }
 
   createWishlistForUser(userId: string) {
