@@ -13,4 +13,14 @@ export class ProductsService {
     // Fetch the products from Firestore with image URLs
     return this.firestore.collection<Products>('products').valueChanges();
   }
+  
+  //  getProductById(id:number): Products{
+  //   return this.getProducts().find(product => product.id == id)!;
+  // }
+
+  // getBrands(): Observable<any[]> {
+  //   // Fetch the brands from Firestore
+  //   return this.firestore.collection('brands').valueChanges();
+  // }
+
 }
