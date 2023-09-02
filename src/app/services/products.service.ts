@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Products } from '../shared/products';
 
@@ -14,9 +14,11 @@ export class ProductsService {
     return this.firestore.collection<Products>('products').valueChanges();
   }
   
-  //  getProductById(id:number): Products{
-  //   return this.getProducts().find(product => product.id == id)!;
-  // }
+  getProductById(id: number): Observable<Products | undefined> {
+    return this.getProducts().pipe(
+      map(products => products.find(product => product.id === id))
+    );
+  }
 
   // getBrands(): Observable<any[]> {
   //   // Fetch the brands from Firestore
