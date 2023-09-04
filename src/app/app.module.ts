@@ -31,6 +31,7 @@ import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
 import {StyleClassModule} from 'primeng/styleclass';
 import { TieredMenuModule } from 'primeng/tieredmenu';
+import { WishlistButtonComponent } from './wishlist-button/wishlist-button.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { TieredMenuModule } from 'primeng/tieredmenu';
     HeaderComponent,
     HomeComponent,
     WishlistPageComponent,
+    WishlistButtonComponent,
     ProductDetailsComponent,
     LoginComponent,
     RegistrationComponent
