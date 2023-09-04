@@ -8,8 +8,8 @@
             <div class="favorite">
                 <app-wishlist-button [product]="product"></app-wishlist-button>
              </div>
-            <div class="star">
-                <p-rating [(ngModel)]="product.rating" [cancel]="false"></p-rating>
+             <div class="star">
+                <app-rating [product]="product" (ratingSubmitted)="onRatingSubmitted($event)"></app-rating>
             </div>
             <div class="product-item-footer">
                 <div class="category">{{product.brand}} | {{product.category}}

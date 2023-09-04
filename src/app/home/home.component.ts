@@ -36,5 +36,8 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/products', productId]);
   }
   
+  onRatingSubmitted(rating: number) {
+    console.log('Rating submitted:', rating);
+  }
 
 }

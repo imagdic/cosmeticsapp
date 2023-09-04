@@ -10,9 +10,9 @@
                     <app-wishlist-button [product]="product"></app-wishlist-button>
                 </div>
             </div>
-            <span class="star">
-                <p-rating [(ngModel)]="product.rating" [cancel]="false"></p-rating>
-            </span>
+            <div class="star">
+                <app-rating [product]="product" (ratingSubmitted)="onRatingSubmitted($event)"></app-rating>
+            </div>
             <div class="product-item-footer">
                 <div class="description">{{product.description}}</div>
                 <div class="brand">{{product.brand}}</div>

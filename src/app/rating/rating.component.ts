@@ -17,25 +17,26 @@ export class RatingComponent {
 
   constructor (private ratingService: RatingService) { }
 
-    submitRating() {
-        // Emit the selected rating to the parent component
-        this.ratingSubmitted.emit(this.selectedRating);
+  submitRating() {
+    // Emit the selected rating to the parent component
+    this.ratingSubmitted.emit(this.selectedRating);
+  }
+
+  onRatingChange(product: Products) {
+    console.log('User in RatingComponent:', this.user);
+    if (!this.user) {
+      console.log('User is not signed in.');
+      return;
     }
 
-    onRatingChange(product: Products) {
-      if (!this.user) {
-        console.log('User is not signed in.');
-        return;
-      }
-  
-      const userId = this.user.uid; 
-      const productId = product.id;
-      const newRating = product.rating;
-  
-      // Update the user's rating for the product
-      this.ratingService.addRating(userId, productId, newRating);
-  
-      // Calculate and update the average rating for the product (optional)
-      this.ratingService.calculateAverageRating(productId);
-    }
+    const userId = this.user.uid; 
+    const productId = product.id;
+    const newRating = this.selectedRating;
+
+    // Update the user's rating for the product
+    this.ratingService.addRating(userId, productId, newRating);
+
+    // Calculate and update the average rating for the product (optional)
+    this.ratingService.calculateAverageRating(productId);
+  }
 }

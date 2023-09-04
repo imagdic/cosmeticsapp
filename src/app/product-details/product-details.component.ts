@@ -32,7 +32,9 @@ export class ProductDetailsComponent implements OnInit{
     });
   }
   
-
+  onRatingSubmitted(rating: number) {
+    console.log('Rating submitted:', rating);
+  }
 
 
 }
