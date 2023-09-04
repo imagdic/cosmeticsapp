@@ -1,3 +1,4 @@
+// header.component.ts
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { MenuItem } from 'primeng/api';
@@ -13,7 +14,7 @@ export class HeaderComponent implements OnInit {
 
   items: MenuItem[] = [
     {
-      label: this.userEmail || 'User', // Postavite inicijalnu vrednost
+      label: 'User', // Default label
       icon: 'pi pi-user',
     },
     {
@@ -35,13 +36,21 @@ export class HeaderComponent implements OnInit {
   isDropdownOpen = false;
 
   ngOnInit(): void {
-    this.authService.getCurrentUser().subscribe((user) => {
-      this.user = user;
-      this.userEmail = user ? user.email : null;
+    this.authService.isAuthenticated().subscribe((authenticated) => {
+      if (authenticated) {
+        this.authService.getCurrentUser().subscribe((user) => {
+          this.user = user;
+          this.userEmail = user ? user.email : null;
 
-      if (this.user) {
-        this.items[0].label = this.user.email;
+          if (this.user) {
+            this.items[0].label = this.user.email;
+          } else {
+            this.items[0].label = 'User';
+          }
+        });
       } else {
+        this.user = null;
+        this.userEmail = null;
         this.items[0].label = 'User';
       }
     });

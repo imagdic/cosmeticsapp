@@ -11,6 +11,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 })
 
 export class AuthService {
+  user: any = null;
 
   constructor(private fireauth: AngularFireAuth, private router: Router, private firestoreService: FirestoreService,
     private firestore: AngularFirestore) { }
