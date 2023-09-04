@@ -7,83 +7,82 @@ import { map } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 
 export class AuthService {
 
-    constructor(private fireauth: AngularFireAuth, private router: Router, private firestoreService: FirestoreService,
-       private firestore: AngularFirestore){}
+  constructor(private fireauth: AngularFireAuth, private router: Router, private firestoreService: FirestoreService,
+    private firestore: AngularFirestore) { }
 
-    //login with Google
-    loginWithGoogle(){
-        return this.fireauth.signInWithPopup(new GoogleAuthProvider());
-    }
+  //login with Google
+  loginWithGoogle() {
+    return this.fireauth.signInWithPopup(new GoogleAuthProvider());
+  }
 
-    //login method
-    login(user: { email: string, password: string }): Promise<void> {
-        return this.fireauth.signInWithEmailAndPassword(user.email, user.password)
-          .then(() => {
-            localStorage.setItem('token', 'true');
-          });
-      }
+  //login method
+  login(user: { email: string, password: string }): Promise<void> {
+    return this.fireauth.signInWithEmailAndPassword(user.email, user.password)
+      .then(() => {
+        localStorage.setItem('token', 'true');
+      });
+  }
 
-      register(user: { email: string; password: string }): Promise<void> {
-        return this.fireauth
-          .createUserWithEmailAndPassword(user.email, user.password)
-          .then((userCredential) => {
-            if (userCredential.user) {
-              alert('Registration successful');
-              const user = userCredential.user;
-              const userData = {
-                email: user.email,
-                // Add any additional user data you want to store in Firestore here
-              };
-      
-              // Add the user to the 'users' collection
-              this.firestoreService.addUserToFirestore(user.uid, userData);
-      
-              // Create an empty wishlist subcollection for the user
-              this.createEmptyWishlist(user.uid);
-      
-            } else {
-              console.error('User is null after registration');
-            }
-          })
-          .catch((error) => {
-            console.error('Error during registration: ', error);
-          });
-      }
-      
-      createEmptyWishlist(userId: string): void {
-        const wishlistRef = this.firestore.collection('users').doc(userId).collection('wishlist');
-      }
-      
+  register(user: { email: string; password: string }): Promise<void> {
+    return this.fireauth
+      .createUserWithEmailAndPassword(user.email, user.password)
+      .then((userCredential) => {
+        if (userCredential.user) {
+          alert('Registration successful');
+          const user = userCredential.user;
+          const userData = {
+            email: user.email
+          };
 
-    //sign out
-    logout(){
-        this.fireauth.signOut().then( () => {
-            localStorage.removeItem('token');
-            this.router.navigate(['/login']);
-        }, err => {
-            alert(err.message);
-        })
-    }
+          // Add the user to the 'users' collection
+          this.firestoreService.addUserToFirestore(user.uid, userData);
 
-    getAuthState() {
-        return this.fireauth.authState;
-      }
+          // Create an empty wishlist subcollection for the user
+          this.createEmptyWishlist(user.uid);
 
-    //provjera autentifikacije
-    isAuthenticated() {
-        return this.fireauth.authState.pipe(
-          map((user) => {
-            return !!user; // Returns true if the user is authenticated, false otherwise
-          })
-        );
-      }
+        } else {
+          console.error('User is null after registration');
+        }
+      })
+      .catch((error) => {
+        console.error('Error during registration: ', error);
+      });
+  }
 
-      getCurrentUser() {
-        return this.fireauth.authState;
-      }
+  createEmptyWishlist(userId: string): void {
+    const wishlistRef = this.firestore.collection('users').doc(userId).collection('wishlist');
+  }
+
+
+  //sign out
+  logout() {
+    this.fireauth.signOut().then(() => {
+      localStorage.removeItem('token');
+      this.router.navigate(['/login']);
+    }, err => {
+      alert(err.message);
+    })
+  }
+
+  getAuthState() {
+    return this.fireauth.authState;
+  }
+
+  //provjera autentifikacije
+  isAuthenticated() {
+    return this.fireauth.authState.pipe(
+      map((user) => {
+        return !!user; // Returns true if the user is authenticated, false otherwise
+      })
+    );
+  }
+
+  getCurrentUser() {
+    return this.fireauth.authState;
+  }
 }

@@ -30,22 +30,11 @@ export class ProductsService {
          return product;
        }))
     )
-    // return this.firestore.collection<Products>('products').valueChanges();
   }
 
   getProductById(productId: string): Observable<Products | undefined> {
     return this.firestore.collection<Products>('products').doc(productId).valueChanges();
   }
   
-  // getProductById(id: number): Observable<Products | undefined> {
-  //   return this.getProducts().pipe(
-  //     map(products => products.find(product => product.id === id))
-  //   );
-  // }
-
-  // getBrands(): Observable<any[]> {
-  //   // Fetch the brands from Firestore
-  //   return this.firestore.collection('brands').valueChanges();
-  // }
 
 }

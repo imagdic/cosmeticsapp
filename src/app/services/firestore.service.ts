@@ -10,11 +10,10 @@ export class FirestoreService {
   constructor(private firestore: AngularFirestore, private afAuth: AngularFireAuth) { }
 
   addUserToFirestore(uid: string, userData: any) {
-    const { email, username } = userData;
+    const { email } = userData; // Destructure both 'email' and 'username' from userData.
   
     return this.firestore.collection('users').doc(uid).set({
-      email,
-      username
+      email
     });
   }
 
