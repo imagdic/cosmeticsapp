@@ -19,19 +19,20 @@ export class ProductDetailsComponent implements OnInit{
     // })
   }
 
-  addToWishlist(product: Products) {
-    this.wishlistService.addToWishlist(product);
-  }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       const productId = params['id'];
       if (productId) {
-        this.productService.getProductById(productId).subscribe((product) => {
+        this.productService.getProductById(productId).subscribe((product) => {    
           this.product = product;
+          console.log(this.product)
         });
       }
     });
   }
+  
+
+
 
 }

@@ -32,6 +32,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import {StyleClassModule} from 'primeng/styleclass';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { WishlistButtonComponent } from './wishlist-button/wishlist-button.component';
+import { RatingComponent } from './rating/rating.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { WishlistButtonComponent } from './wishlist-button/wishlist-button.compo
     WishlistButtonComponent,
     ProductDetailsComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    RatingComponent
   ],
   imports: [
     BrowserModule,

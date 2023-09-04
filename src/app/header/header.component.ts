@@ -37,9 +37,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.authService.getCurrentUser().subscribe((user) => {
       this.user = user;
-      this.userEmail = user ? user.email : null; // Postavi userEmail na email korisnika ili null ako korisnik nije prijavljen
+      this.userEmail = user ? user.email : null;
 
-      // Ažurirajte label atribut za "User" stavku
       if (this.user) {
         this.items[0].label = this.user.email;
       } else {

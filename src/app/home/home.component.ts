@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../services/products.service';
 import { Products } from '../shared/products';
-import { WishlistService } from '../services/wishlist.service';
 import { AuthService } from '../services/auth.service';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { FirestoreService } from '../services/firestore.service';
 import { Router } from '@angular/router';
+import { RatingService } from '../services/rating.service';
 
 @Component({
   selector: 'app-home',
@@ -16,33 +14,8 @@ export class HomeComponent implements OnInit {
   user:any;
   products: Products[]=[];
 
-  constructor (private productsService: ProductsService, private wishlistService: WishlistService, private authService: AuthService,
-    private db: AngularFirestore,  private firestoreService: FirestoreService, private router: Router) {  }
-
-  addToWishlist(product: Products) {
-    this.authService.getAuthState().subscribe((user) => {
-      if (user) {
-        const userId = user.uid;
-  
-        const wishlistItem = {
-          productId: product.id.toString(), 
-          productName: product.name,
-        };
-  
-        const wishlistDocRef = this.db.collection('users').doc(userId).collection('wishlist').doc(product.id.toString());
-  
-        wishlistDocRef.set(wishlistItem)
-          .then(() => {
-            console.log('Product added to wishlist successfully.');
-          })
-          .catch((error) => {
-            console.error('Error adding product to wishlist:', error);
-          });
-      } else {
-        console.log('User is not authenticated. Please log in to add to your wishlist.');
-      }
-    });
-  }
+  constructor (private productsService: ProductsService, private ratingService: RatingService, 
+    private authService: AuthService, private router: Router) {  }
   
 
   ngOnInit(): void {
