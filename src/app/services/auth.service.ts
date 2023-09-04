@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { FirestoreService } from './firestore.service';
 import { map } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +12,8 @@ import { map } from 'rxjs';
 
 export class AuthService {
 
-    constructor(private fireauth: AngularFireAuth, private router: Router, private firestoreService: FirestoreService){}
+    constructor(private fireauth: AngularFireAuth, private router: Router, private firestoreService: FirestoreService,
+       private firestore: AngularFirestore){}
 
     //login with Google
     loginWithGoogle(){
@@ -26,12 +28,10 @@ export class AuthService {
           });
       }
 
-    //register method
-    register(user: { email: string; password: string }): Promise<void> {
+      register(user: { email: string; password: string }): Promise<void> {
         return this.fireauth
           .createUserWithEmailAndPassword(user.email, user.password)
           .then((userCredential) => {
-            // Check if userCredential.user is not null
             if (userCredential.user) {
               alert('Registration successful');
               const user = userCredential.user;
@@ -39,9 +39,14 @@ export class AuthService {
                 email: user.email,
                 // Add any additional user data you want to store in Firestore here
               };
+      
+              // Add the user to the 'users' collection
               this.firestoreService.addUserToFirestore(user.uid, userData);
+      
+              // Create an empty wishlist subcollection for the user
+              this.createEmptyWishlist(user.uid);
+      
             } else {
-              // Handle the case where userCredential.user is null
               console.error('User is null after registration');
             }
           })
@@ -49,6 +54,11 @@ export class AuthService {
             console.error('Error during registration: ', error);
           });
       }
+      
+      createEmptyWishlist(userId: string): void {
+        const wishlistRef = this.firestore.collection('users').doc(userId).collection('wishlist');
+      }
+      
 
     //sign out
     logout(){

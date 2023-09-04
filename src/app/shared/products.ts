@@ -1,5 +1,5 @@
 export class Products {
-    id!: number;
+    id!: string;
     price!:number;
     name!:string;
     description!:string;
@@ -7,6 +7,5 @@ export class Products {
     favorite: boolean = false;
     rating: number = 0;
     category!: string;
-    tags?: string[];
     imageUrl!: string;
 }

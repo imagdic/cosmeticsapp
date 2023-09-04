@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
     },
     {
       label: 'Wishlist',
-      icon: 'pi pi-fw pi-pencil',
+      icon: 'pi pi-fw pi-heart',
       routerLink: '/wishlist',
     },
     {

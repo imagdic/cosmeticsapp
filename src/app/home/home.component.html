@@ -1,6 +1,6 @@
 <ul class="image-grid">
     <li *ngFor="let product of products">
-        <a routerLink="/product/{{product.id}}"><img src="{{product.imageUrl}}" alt="product images"></a>
+        <a [routerLink]="['/product', product.id]"><img src="{{product.imageUrl}}" alt="product images"></a>
         <div class="content">
             <div class="name">
                 {{product.name}}
@@ -20,3 +20,5 @@
         </div>
     </li>
 </ul>
+
+<!-- {{products | json}} -->

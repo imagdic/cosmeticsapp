@@ -10,13 +10,13 @@ import { WishlistService } from '../services/wishlist.service';
   styleUrls: ['./product-details.component.scss']
 })
 export class ProductDetailsComponent implements OnInit{
-  product!:Products;
+  product: Products | undefined;
   
   constructor(private activatedRoute: ActivatedRoute, private productService: ProductsService, private wishlistService: WishlistService) {
-    activatedRoute.params.subscribe((params)=>{
-      if(params['id'])
-      this.product = productService.getProductById(params['id']) 
-    })
+    // activatedRoute.params.subscribe((params)=>{
+    //   if(params['id'])
+    //   this.product = productService.getProductById(params['id']) 
+    // })
   }
 
   addToWishlist(product: Products) {
@@ -24,7 +24,14 @@ export class ProductDetailsComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    
+    this.activatedRoute.params.subscribe((params) => {
+      const productId = params['id'];
+      if (productId) {
+        this.productService.getProductById(productId).subscribe((product) => {
+          this.product = product;
+        });
+      }
+    });
   }
 
 }

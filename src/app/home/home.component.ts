@@ -5,6 +5,7 @@ import { WishlistService } from '../services/wishlist.service';
 import { AuthService } from '../services/auth.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FirestoreService } from '../services/firestore.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,7 @@ export class HomeComponent implements OnInit {
   products: Products[]=[];
 
   constructor (private productsService: ProductsService, private wishlistService: WishlistService, private authService: AuthService,
-    private db: AngularFirestore,  private firestoreService: FirestoreService) {  }
+    private db: AngularFirestore,  private firestoreService: FirestoreService, private router: Router) {  }
 
   addToWishlist(product: Products) {
     this.authService.getAuthState().subscribe((user) => {
@@ -55,14 +56,12 @@ export class HomeComponent implements OnInit {
     
      this.productsService.getProducts().subscribe((data: Products[]) => {
       this.products = data;
-      console.log(data);
     });
-
-    
   }
 
-
-  
+  viewProductDetails(productId: string) {
+    this.router.navigate(['/products', productId]);
+  }
   
 
 }

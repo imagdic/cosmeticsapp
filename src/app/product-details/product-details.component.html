@@ -1,24 +1,25 @@
 <div class="container">
-    <img [src]="product.imageUrl" [alt]="product.name">
-    <div class="details">
-        <div class="header">
-            <span class="name">
-                {{product.name}}
+    <div *ngIf="product">
+        <img [src]="product.imageUrl" [alt]="product.name">
+        <div class="details">
+            <div class="header">
+                <span class="name">
+                    {{product.name}}
+                </span>
+                <div class="favorite">
+                    <p-toggleButton [(ngModel)]="product.favorite" onIcon="pi pi-heart-fill" offIcon="pi pi-heart"
+                    styleClass="p-button-rounded p-button-help p-button-raised" (click)="addToWishlist(product)"></p-toggleButton>
+                </div>
+            </div>
+            <span class="star">
+                <p-rating [(ngModel)]="product.rating" [cancel]="false"></p-rating>
             </span>
-            <div class="favorite">
-                <p-toggleButton [(ngModel)]="product.favorite" onIcon="pi pi-heart-fill" offIcon="pi pi-heart"
-                styleClass="p-button-rounded p-button-help p-button-raised" (click)="addToWishlist(product)"></p-toggleButton>
-               <!-- <p-button icon="pi pi-heart" styleClass="p-button-rounded p-button-help p-button-text p-button-raised"></p-button>-->
+            <div class="product-item-footer">
+                <div class="description">{{product.description}}</div>
+                <div class="brand">{{product.brand}}</div>
+                <div class="category">Category: {{product.category}}</div>
+                <div class="price">{{product.price | currency:'EUR'}}</div>
             </div>
-        </div>
-        <span class="star">
-            <p-rating [(ngModel)]="product.rating" [cancel]="false"></p-rating>
-        </span>
-        <div class="product-item-footer">
-            <div class="description">{{product.description}}</div>
-            <div class="category">Category: {{product.category}}
-            </div>
-            <div class="price">{{product.price | currency:'EUR'}}</div>
         </div>
     </div>
 </div>
