@@ -31,9 +31,13 @@ export class HomeComponent implements OnInit {
   }
 
   rateProduct(productId: string, ratingValue: number): void {
-    console.log('HomeComponent rateProduct called with product ID:', productId, 'and rating:', ratingValue);
-    this.ratingService.rateProduct(productId, ratingValue);
+    this.authService.isAuthenticated().subscribe(isAuthenticated => {
+        if (!isAuthenticated) {
+            alert('Please log in to leave a review!');
+            return;
+        }
+        this.ratingService.rateProduct(productId, ratingValue);
+    });
 }
-  
-  
+
 }

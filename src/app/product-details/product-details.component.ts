@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../services/products.service';
 import { WishlistService } from '../services/wishlist.service';
 import { RatingService } from '../services/rating.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-product-details',
@@ -16,7 +17,7 @@ export class ProductDetailsComponent implements OnInit{
 
   
   constructor(private activatedRoute: ActivatedRoute, private productService: ProductsService, 
-    private ratingService: RatingService, private wishlistService: WishlistService) {
+    private ratingService: RatingService, private wishlistService: WishlistService, private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -38,14 +39,16 @@ export class ProductDetailsComponent implements OnInit{
             });
         }
     });
+} 
+
+rateProduct(productId: string, ratingValue: number): void {
+  this.authService.isAuthenticated().subscribe(isAuthenticated => {
+      if (!isAuthenticated) {
+          alert('Please log in to leave a review!');
+          return;
+      }
+      this.ratingService.rateProduct(productId, ratingValue);
+  });
 }
-
-
-  
-
-  rateProduct(productId: string, ratingValue: number): void {
-    console.log('Rate Product Method called with:', productId, ratingValue);
-    this.ratingService.rateProduct(productId, ratingValue);
-  }
   
 }
