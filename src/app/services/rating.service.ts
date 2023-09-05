@@ -34,7 +34,7 @@ export class RatingService {
   }
   
 
-  getRatingsForProduct(productId: string): Observable<any[]> {
+  getProductRating(productId: string): Observable<any[]> {
     return this.firestore.collection('ratings', ref => ref.where('product', '==', productId)).valueChanges();
   }
   

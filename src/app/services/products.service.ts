@@ -19,7 +19,7 @@ export class ProductsService {
           const productObservables = products.map(productSnapshot => {
              const productData = productSnapshot.payload.doc.data() as Products;
              const productId = productSnapshot.payload.doc.id;
-             return this.ratingService.getRatingsForProduct(productId).pipe(
+             return this.ratingService.getProductRating(productId).pipe(
                  map(ratings => {
                     const totalRating = ratings.reduce((acc, curr) => acc + curr.rating, 0);
                     const averageRating = ratings.length ? totalRating / ratings.length : 0;
@@ -44,24 +44,22 @@ export class ProductsService {
 getProductById(productId: string): Observable<Products | undefined> {
   return this.firestore.collection<Products>('products').doc(productId).snapshotChanges()
     .pipe(
-      map(action => {
+      switchMap(action => {
         const data = action.payload.data() as Products;
         const id = action.payload.id;
-        return {
-          id: id,
-          name: data.name,
-          brand: data.brand,
-          category: data.category,
-          price: data.price,
-          description: data.description,
-          imageUrl: data.imageUrl,
-          rating: data.rating,
-          favorite: data.favorite
-        };
+        return this.ratingService.getProductRating(productId).pipe(
+          map(ratings => {
+            const totalRating = ratings.reduce((acc, curr) => acc + curr.rating, 0);
+            const averageRating = ratings.length ? totalRating / ratings.length : 0;
+            return {
+              ...data,
+              id: id,
+              rating: averageRating
+            } as Products;
+          })
+        );
       })
     );
 }
-
-  
 
 }

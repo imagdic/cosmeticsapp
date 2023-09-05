@@ -12,6 +12,8 @@ import { RatingService } from '../services/rating.service';
 })
 export class ProductDetailsComponent implements OnInit{
   product: Products | undefined;
+  averageRating: number | null = null;
+
   
   constructor(private activatedRoute: ActivatedRoute, private productService: ProductsService, 
     private ratingService: RatingService, private wishlistService: WishlistService) {
@@ -19,14 +21,26 @@ export class ProductDetailsComponent implements OnInit{
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
-      const productId = params['id'];
-      if (productId) {
-        this.productService.getProductById(productId).subscribe((product) => {
-          this.product = product;
-        });
-      }
+        const productId = params['id'];
+        if (productId) {
+            this.productService.getProductById(productId).subscribe((product) => {
+                this.product = product;
+
+                // After setting the product, get its ratings
+                this.ratingService.getProductRating(productId).subscribe(ratings => {
+                    if (ratings && ratings.length > 0) {
+                        const totalRatings = ratings.reduce((acc, rating) => acc + rating.rating, 0);
+                        this.averageRating = totalRatings / ratings.length;
+                    } else {
+                        this.averageRating = null;
+                    }
+                });
+            });
+        }
     });
 }
+
+
   
 
   rateProduct(productId: string, ratingValue: number): void {
