@@ -28,8 +28,6 @@ export class LoginComponent {
   }
 
   loginWithEmail() {
-    console.log(this.loginForm.value);
-  
     const email = this.loginForm.value.email!;
     const password = this.loginForm.value.password!;
   

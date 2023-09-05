@@ -28,6 +28,8 @@ export class RatingService {
             console.log('User has already rated this product.');
           }
         });
+      } else {
+        alert('Please log in first');
       }
     });
   }
