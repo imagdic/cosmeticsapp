@@ -1,59 +1,48 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Products } from '../shared/products';
-import { User } from 'firebase/auth';
-import { RatingService } from '../services/rating.service';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { Products } from '../shared/products';
+import { ProductsService } from '../services/products.service';
+import { RatingService } from '../services/rating.service';
 
 @Component({
   selector: 'app-rating',
   templateUrl: './rating.component.html',
   styleUrls: ['./rating.component.scss']
 })
-export class RatingComponent {
-  @Input() product!: Products;
-  @Output() ratingSubmitted = new EventEmitter<number>();
+export class RatingComponent implements OnInit {
+  @Input() rating: number | undefined;
+  @Output() ratingChange = new EventEmitter<number>();
 
-  selectedRating: number = 0;
-  user: any;
-  userEmail: string | null = null;
+  constructor(private authService: AuthService, private productService: ProductsService, private ratingService: RatingService) {}
 
-  constructor (private ratingService: RatingService, private authService: AuthService) { }
+  ngOnInit(): void {  };
 
-  submitRating() {
-    // Emit the selected rating to the parent component
-    this.ratingSubmitted.emit(this.selectedRating);
+
+  rateProduct(event: any) {
+    const productId = 'your-product-id'; // Replace with the actual product ID
+    const rating = event.value; // The selected rating value from the event
+
+    // Call the addRating method from your RatingService
+    this.ratingService.addRating(productId, rating);
   }
 
-  onRatingChange(product: Products) {
-    console.log('User in RatingComponent:', this.user);
-    if (!this.user) {
-      console.log('User is not signed in.');
-      return;
-    }
 
-    const userId = this.user.uid;
-    const productId = product.id;
-    const newRating = this.selectedRating;
-    console.log('userId: '+ userId + 'productId: ', productId + 'newRating: ' + newRating);
+  // onStarClick(starValue: number) {
+  //   if (!this.user) {
+  //     // User is not authenticated, show a message or a popup.
+  //     alert('Please log in to leave a review.');
+  //     return;
+  //   }
 
-    // Update the user's rating for the product
-    this.ratingService.addRating(userId, productId, newRating);
+  //   if (!this.currentProduct) {
+  //     // Handle the case where there's no current product selected.
+  //     return;
+  //   }
 
-    this.ratingService.calculateAverageRating(productId);
-  }
+  //   // User is authenticated, allow rating.
+  //   this.selectedRating = starValue;
+  //   // Emit the rating to the parent component with product information.
+  //   this.ratingSubmitted.emit({ productId: this.currentProduct.id, rating: this.selectedRating });
+  // }
 
-  ngOnInit(): void {
-    this.authService.isAuthenticated().subscribe((authenticated) => {
-      if (authenticated) {
-        this.authService.getCurrentUser().subscribe((user) => {
-          this.user = user;
-          this.userEmail = user ? user.email : null;
-
-        });
-      } else {
-        this.user = null;
-        this.userEmail = null;
-      }
-    });
-  }
 }

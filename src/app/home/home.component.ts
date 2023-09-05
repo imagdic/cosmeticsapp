@@ -19,14 +19,6 @@ export class HomeComponent implements OnInit {
   
 
   ngOnInit(): void {
-    this.authService.isAuthenticated().subscribe((authenticated) => {
-      if (authenticated) {
-        // display the heart icon
-      } else {
-        // User is not authenticated, handle this case, e.g., prompt for login
-      }
-    });
-    
      this.productsService.getProducts().subscribe((data: Products[]) => {
       this.products = data;
     });
@@ -36,8 +28,6 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/products', productId]);
   }
   
-  onRatingSubmitted(rating: number) {
-    console.log('Rating submitted:', rating);
-  }
+  
 
 }
