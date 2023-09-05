@@ -78,7 +78,7 @@ export class AuthService {
   isAuthenticated() {
     return this.fireauth.authState.pipe(
       map((user) => {
-        return !!user; // Returns true if the user is authenticated, false otherwise
+        return !!user;
       })
     );
   }
