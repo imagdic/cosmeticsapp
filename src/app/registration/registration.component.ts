@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 export class RegistrationComponent {
 
   registerForm = this.fb.group({
-    username: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required])
   })

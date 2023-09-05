@@ -8,10 +8,6 @@
     </div>
 
     <div [formGroup]="registerForm">
-        <label for="email1" class="block text-900 font-medium mb-2">Username</label>
-        <input id="email1" type="text" placeholder="Username" pInputText class="w-full mb-3" formControlName="username">
-        <small class="p-error block" *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.dirty">Username is required</small>
-
         <label for="email1" class="block text-900 font-medium mb-2">Email</label>
         <input id="email1" type="text" placeholder="Email address" pInputText class="w-full mb-3" formControlName="email">
         <small class="p-error block" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.dirty">Email is required</small> 
