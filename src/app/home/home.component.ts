@@ -14,6 +14,7 @@ import { RatingComponent } from '../rating/rating.component';
 export class HomeComponent implements OnInit {
   user:any;
   products: Products[]=[];
+  rating!: string;
 
   constructor (private productsService: ProductsService, private ratingService: RatingService, 
     private authService: AuthService, private router: Router) {  }
@@ -29,10 +30,10 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/products', productId]);
   }
 
-  onRatingClicked(rating: number) {
-    console.log('User gave a rating of:', rating);
-  }
+  rateProduct(productId: string, ratingValue: number): void {
+    console.log('HomeComponent rateProduct called with product ID:', productId, 'and rating:', ratingValue);
+    this.ratingService.rateProduct(productId, ratingValue);
+}
   
   
-
 }

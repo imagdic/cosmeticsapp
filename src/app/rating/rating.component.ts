@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-rating',
@@ -6,18 +6,20 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./rating.component.scss']
 })
 export class RatingComponent implements OnInit {
-  value: number = 0;
-  @Output() ratingClicked = new EventEmitter<number>();
-  
+  @Input() rating: number = 0;
+  @Output() ratingChange = new EventEmitter<number>();
+
   constructor() {}
 
-  ngOnInit(): void {  };
+  onRatingChanged(event: any): void {
+    console.log('onRatingChanged called with event:', event);
 
-  onRatingClick(event: any) {
-    this.value = event.value;
+    // If the event structure contains a 'value' property, extract it
+    this.rating = event.value ? event.value : event;
+    
+    console.log('Emitting rating value:', this.rating);
+    this.ratingChange.emit(this.rating);
+}
 
-    this.ratingClicked.emit(this.value);
-  }
-
-
+  ngOnInit(): void { };
 }

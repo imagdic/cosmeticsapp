@@ -1,3 +1,3 @@
 <div class="star">
-    <p-rating [(ngModel)]="value" [cancel]="false" (onChange)="onRatingClick($event)"></p-rating>
+    <p-rating [(ngModel)]="rating" [cancel]="false" (onRate)="onRatingChanged($event)"></p-rating>
 </div>
