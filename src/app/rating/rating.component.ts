@@ -1,8 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
-import { Products } from '../shared/products';
-import { ProductsService } from '../services/products.service';
-import { RatingService } from '../services/rating.service';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-rating',
@@ -10,19 +6,17 @@ import { RatingService } from '../services/rating.service';
   styleUrls: ['./rating.component.scss']
 })
 export class RatingComponent implements OnInit {
-  @Input() rating: number | undefined;
-  @Output() ratingChange = new EventEmitter<number>();
-
-  constructor(private authService: AuthService, private productService: ProductsService, private ratingService: RatingService) {}
+  value: number = 0;
+  @Output() ratingClicked = new EventEmitter<number>();
+  
+  constructor() {}
 
   ngOnInit(): void {  };
 
+  onRatingClick(event: any) {
+    this.value = event.value;
 
-  rateProduct(event: any) {
-    const productId = 'your-product-id';
-    const rating = event.value; 
-
-    this.ratingService.addRating(productId, rating);
+    this.ratingClicked.emit(this.value);
   }
 
 
