@@ -56,7 +56,10 @@ export class AuthService {
   }
 
   createEmptyWishlist(userId: string): void {
-    const wishlistRef = this.firestore.collection('users').doc(userId).collection('wishlist');
+    const userRef = this.firestore.collection('users').doc(userId);
+  
+    // empty wishlist array
+    userRef.set({ wishlist: [] }, { merge: true });
   }
 
 
