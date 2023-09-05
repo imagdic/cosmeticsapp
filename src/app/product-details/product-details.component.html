@@ -11,7 +11,7 @@
                 </div>
             </div>
             <div class="star">
-                <app-rating ></app-rating>
+                <app-rating [(rating)]="product.rating" (ratingChange)="rateProduct(product.id, $event)"></app-rating>
             </div>
             <div class="product-item-footer">
                 <div class="description">{{product.description}}</div>
