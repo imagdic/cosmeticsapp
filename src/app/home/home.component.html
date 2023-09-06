@@ -1,3 +1,25 @@
+<!-- Introductory Section -->
+<div class="intro-section">
+    <h1>Welcome to Croatian Cosmetis app!</h1>
+    <p>Discover, review, and create your perfect skincare and beauty routine from the best of Croatian cosmetics.</p>
+    
+    <div class="features">
+        <div class="feature">
+            <h3>Discover Croatian Cosmetics</h3>
+            <p>Explore a diverse range of Croatian skincare, makeup, and more.</p>
+    
+        </div>
+        <div class="feature">
+            <h3>Unbiased Reviews</h3>
+            <p>Transparent, community-driven reviews to guide your choices.</p>
+        </div>
+        <div class="feature">
+            <h3>Create Your Wishlist</h3>
+            <p>Add favorites and keep track of desired products.</p>
+        </div>
+    </div>
+</div>
+
 <ul class="image-grid">
     <li *ngFor="let product of products">
         <a [routerLink]="['/product', product.id]"><img src="{{product.imageUrl}}" alt="product images"></a>

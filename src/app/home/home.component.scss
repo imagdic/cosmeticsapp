@@ -1,3 +1,63 @@
+/* Introductory Section */
+.intro-section {
+  background-color: #f6f6f9;
+    padding: 2rem;
+    margin-top: 0; // or adjust this value based on your header's height
+    text-align: center;
+  
+  h1 {
+      color: #883cae;
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+  }
+
+  p {
+      font-size: 1.1rem;
+      color: #555; 
+      margin-bottom: 2rem;
+  }
+
+  .features {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      
+      .feature {
+          flex-basis: calc(33.33% - 1rem); 
+          box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+          padding: 1rem;
+          margin: 0.5rem;
+          border-radius: 8px;
+          background-color: white;
+          
+          h3 {
+              color: #883cae;
+              font-size: 1.2rem;
+              margin-bottom: 1rem;
+          }
+
+          p {
+              font-size: .9rem;
+              color: #777; // Even more muted for this text
+          }
+      }
+  }
+
+  @media screen and (max-width: 768px) { 
+      // Adjustments for tablets and mobile screens
+      .features {
+          flex-direction: column;
+          
+          .feature {
+              flex-basis: auto; // Let the boxes resize as needed
+              width: 100%; 
+          }
+      }
+  }
+}
+
+/* Products section*/
+
 .image-grid {
     display: flex;
     flex-wrap: wrap;
@@ -6,16 +66,14 @@
   }
   
   .image-grid li {
-    width: 20%; /* 5 slika u retku */
-    padding: 10px; /* Razmak oko box-eva */
-    box-sizing: border-box; /* Uključuje padding u ukupnu širinu */
+    width: 20%;
+    padding: 10px;
+    box-sizing: border-box; 
 
-     /* Prilagodba na manjim ekranima */
   @media (max-width: 768px) {
-    width: 50%; /* 2 slike u retku */
+    width: 50%; 
   }
 
-  /* Prilagodba na još manjim ekranima */
   @media (max-width: 480px) {
     width: 100%; /* 1 slika u retku */
   }
@@ -24,19 +82,18 @@
   .image-grid img {
     max-width: 100%;
     max-height: 100%;
-    object-fit: contain; /* Prilagodi sliku proporcionalno unutar box-a */
+    object-fit: contain;
   }
 
   ul li a{
     height: 15rem;
     width: 15rem;
-    border: 1px solid whitesmoke;
+    border: 1.8px solid whitesmoke;
     border-radius: 1rem;
     margin: 0.5rem;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    color: purple;
 }
 
 li a:hover{
@@ -64,12 +121,10 @@ li a:hover{
     color: purple!important;
 }
 
+.star {
+  padding-top: .2rem;
 }
 
-//star icon
-.star{
-  margin-bottom: .2rem;
-  margin-top: .4rem;
 }
 
 .product-item-footer{
