@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { WishlistService } from '../services/wishlist.service';
 import { Products } from '../shared/products';
 import { Observable } from 'rxjs';
@@ -8,14 +8,14 @@ import { Observable } from 'rxjs';
   templateUrl: './wishlist-page.component.html',
   styleUrls: ['./wishlist-page.component.scss']
 })
-export class WishlistPageComponent {
-  wishlist$: Observable<Products[]>;
+export class WishlistPageComponent implements OnInit {
+  wishlistProducts: Products[] = [];
 
-  constructor(private wishlistService: WishlistService) {
-    this.wishlist$ = this.wishlistService.wishlist$;
+  constructor(private wishlistService: WishlistService) { }
+  ngOnInit() {
+    this.wishlistService.getUserWishlistProducts().subscribe(products => {
+      this.wishlistProducts = products;
+    })
   }
 
-  removeFromWishlist(product: Products) {
-    this.wishlistService.removeFromWishlist(product);
-  }
 }

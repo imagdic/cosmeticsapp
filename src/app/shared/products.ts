@@ -4,7 +4,6 @@ export class Products {
     name!:string;
     description!:string;
     brand!: string;
-    favorite: boolean = false;
     rating: number = 0;
     category!: string;
     imageUrl!: string;

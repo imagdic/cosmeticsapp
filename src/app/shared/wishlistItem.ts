@@ -1,10 +1,10 @@
-import { Products } from "./products";
+// import { Products } from "./products";
 
-export class WishlistItem {
+// export class WishlistItem {
 
-    constructor(product:Products){
-        this.product = product;
-    }
+//     constructor(product:Products){
+//         this.product = product;
+//     }
 
-    product: Products;
-}
+//     product: Products;
+// }

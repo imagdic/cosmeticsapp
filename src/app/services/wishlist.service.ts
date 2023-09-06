@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Wishlist } from '../shared/wishlist';
 import { Products } from '../shared/products';
-import { WishlistItem } from '../shared/wishlistItem';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, combineLatest, of } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AuthService } from './auth.service';
+import { switchMap, map } from 'rxjs/operators';
+import { RatingService } from './rating.service';
+import { ProductsService } from './products.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class WishlistService {
   private wishlistSubject = new BehaviorSubject<Products[]>([]);
   wishlist$ = this.wishlistSubject.asObservable();
 
-  constructor(private firestore: AngularFirestore, private authService: AuthService) {}
+  constructor(private firestore: AngularFirestore, private authService: AuthService, private productService: ProductsService) {}
 
 
   addToWishlist(product: Products) {
@@ -43,12 +44,34 @@ export class WishlistService {
     });
   }
 
-  removeFromWishlist(product: Products) {
-    const currentWishlist = this.wishlistSubject.value;
-    const updatedWishlist = currentWishlist.filter(p => p.id !== product.id);
-    this.wishlistSubject.next(updatedWishlist);
-  }
+  getUserWishlistProducts(): Observable<Products[]> {
+    return this.authService.getCurrentUser().pipe(
+      switchMap(user => {
+        if (user) {
+          // Retrieve wishlist for the authenticated user using user.uid
+          return this.firestore.collection('users').doc(user.uid).valueChanges();
+        } else {
+          return of(null);
+        }
+      }),
+      switchMap((userData: any) => {
+        if (userData?.wishlist) {
+          const productIds = userData.wishlist;
 
+          // Map over each product ID to get its details.
+          const productObservables = productIds.map((productId: string) => {
+            return this.productService.getProductById(productId);
+          });
+
+          return combineLatest(productObservables) as Observable<Products[]>;
+        } else {
+          // Return an empty array if no wishlist or not authenticated
+          return of([]);
+        }
+      })
+    );
+  }
   
 
 }
+  

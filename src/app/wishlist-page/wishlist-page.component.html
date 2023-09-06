@@ -1,4 +1,11 @@
-<div *ngFor="let product of wishlist$ | async">
+<div *ngFor="let product of wishlistProducts">
+    {{product.name}}
+</div>
+  
+
+
+
+<!-- <div *ngFor="let product of wishlist$ | async">
     <table class="image-grid">
         <tr>
             <a routerLink="/product/{{product.id}}"><img src="{{product.imageUrl}}" alt="product images"></a>
@@ -20,4 +27,4 @@
     </table>
 </div>
 
-  
+   -->
