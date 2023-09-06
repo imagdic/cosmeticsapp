@@ -1,2 +1,7 @@
-<p-button icon="pi pi-heart" styleClass="p-button-rounded p-button-help p-button-text p-button-raised" *ngIf="product" (click)="addToWishlist(product)" [disabled]="isDisabled"></p-button>
-  
+<p-button 
+  [icon]="isFavorite ? 'pi pi-heart-fill' : 'pi pi-heart'" 
+  styleClass="p-button-rounded p-button-help p-button-text p-button-raised" 
+  *ngIf="product" 
+  (click)="addToWishlist(product)" 
+  [disabled]="isDisabled">
+</p-button>

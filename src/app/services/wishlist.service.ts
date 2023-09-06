@@ -21,28 +21,39 @@ export class WishlistService {
     this.authService.getAuthState().subscribe((user) => {
       if (user) {
         const userId = user.uid;
-  
-        const productRef = this.firestore.collection('products').doc(product.id); // Reference to the product
-  
-        const wishlistItem = {
-          productRef: productRef, // Store the product reference
-          productName: product.name,
-        };
-  
-        const wishlistDocRef = this.firestore.collection('users').doc(userId).collection('wishlist').doc(product.id.toString());
-  
-        wishlistDocRef.set(wishlistItem)
-          .then(() => {
-            console.log('Product added to wishlist successfully.');
-          })
-          .catch((error) => {
-            console.error('Error adding product to wishlist:', error);
-          });
+        const userDocRef = this.firestore.collection('users').doc(userId);
+
+        // Get the current wishlist array from the user document
+        userDocRef.get().subscribe((doc) => {
+          if (doc.exists) {
+            const data = doc.data() as { wishlist?: string[] };
+            const currentWishlist = data.wishlist || [];
+
+            // Add the product ID to the wishlist if it's not already there
+            if (!currentWishlist.includes(product.id)) {
+              currentWishlist.push(product.id);
+
+              // Update the user's wishlist in Firestore
+              userDocRef.update({ wishlist: currentWishlist })
+                .then(() => {
+                  console.log('Product added to wishlist successfully.');
+                })
+                .catch((error) => {
+                  console.error('Error adding product to wishlist:', error);
+                });
+            } else {
+              console.log('Product is already in the wishlist.');
+            }
+          } else {
+            console.log('User document not found.');
+          }
+        });
       } else {
         console.log('User is not authenticated. Please log in to add to your wishlist.');
       }
     });
-  }
+}
+
 
   getUserWishlistProducts(): Observable<Products[]> {
     return this.authService.getCurrentUser().pipe(
