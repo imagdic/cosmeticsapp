@@ -11,11 +11,15 @@ html {
 
 body {
     margin: 0;
-    font-family: var(--font-family);
+    font-family: 'Open Sans', sans-serif; // Set the font-family to Open Sans, with a fallback to the default sans-serif font
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
+
 a{
     text-decoration: none;
+}
+:root {
+    --font-family: 'Open Sans', sans-serif;
 }

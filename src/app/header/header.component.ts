@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(private authService: AuthService) { }
 
-  isDropdownOpen = false;
+  isMenuActive = false;
 
   ngOnInit(): void {
     this.authService.isAuthenticated().subscribe((authenticated) => {
@@ -37,6 +37,10 @@ export class HeaderComponent implements OnInit {
       }
     });
   }
+
+  toggleMenu(): void {
+    this.isMenuActive = !this.isMenuActive;
+}
 
   setMenuItems(isAuthenticated: boolean): void {
     if (isAuthenticated) {
