@@ -61,7 +61,7 @@ export class HeaderComponent implements OnInit {
     } else {
       this.items = [
         {
-          label: 'User', // Default label
+          label: 'User',
           icon: 'pi pi-user',
         },
         {
@@ -72,7 +72,7 @@ export class HeaderComponent implements OnInit {
         {
           label: 'Login',
           icon: 'pi pi-sign-in',
-          routerLink: '/login'  // Assuming you have a '/login' route for login page
+          routerLink: '/login'
         }
       ];
     }

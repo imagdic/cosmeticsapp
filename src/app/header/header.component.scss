@@ -1,15 +1,16 @@
 header {
     background-color: white;
     padding: 0;
-    border-bottom: 1px solid rgb(193, 71, 193);
+    border-bottom: 1px solid #883cae;
+    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.1);
 }
 
 a {
-    color: rgb(193, 71, 193);
+    color: #883cae;
 }
 
 a:hover {
-    background-color: rgb(193, 71, 193);
+    background-color: #883cae;
     color: white;
 }
 .container{
@@ -40,7 +41,7 @@ nav ul li a{
 }
 
 .profile-link:hover {
-  background-color: rgb(193, 71, 193);
+  background-color: #883cae;
   color: white;
 }
 
