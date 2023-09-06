@@ -17,42 +17,65 @@ export class WishlistService {
   constructor(private firestore: AngularFirestore, private authService: AuthService, private productService: ProductsService) {}
 
 
-  addToWishlist(product: Products) {
-    this.authService.getAuthState().subscribe((user) => {
-      if (user) {
-        const userId = user.uid;
-        const userDocRef = this.firestore.collection('users').doc(userId);
+  addToWishlist(product: Products): Observable<boolean> {
+    return new Observable<boolean>((observer) => {
+        this.authService.getAuthState().subscribe((user) => {
+            if (user) {
+                const userId = user.uid;
+                const userDocRef = this.firestore.collection('users').doc(userId);
 
-        // Get the current wishlist array from the user document
-        userDocRef.get().subscribe((doc) => {
-          if (doc.exists) {
-            const data = doc.data() as { wishlist?: string[] };
-            const currentWishlist = data.wishlist || [];
+                userDocRef.get().subscribe((doc) => {
+                    if (doc.exists) {
+                        const data = doc.data() as { wishlist?: string[] };
+                        const currentWishlist = data.wishlist || [];
 
-            // Add the product ID to the wishlist if it's not already there
-            if (!currentWishlist.includes(product.id)) {
-              currentWishlist.push(product.id);
+                        if (!currentWishlist.includes(product.id)) {
+                            currentWishlist.push(product.id);
 
-              // Update the user's wishlist in Firestore
-              userDocRef.update({ wishlist: currentWishlist })
-                .then(() => {
-                  console.log('Product added to wishlist successfully.');
-                })
-                .catch((error) => {
-                  console.error('Error adding product to wishlist:', error);
+                            userDocRef.update({ wishlist: currentWishlist })
+                                .then(() => {
+                                    console.log('Product added to wishlist successfully.');
+                                    observer.next(true);
+                                    observer.complete();
+                                })
+                                .catch((error) => {
+                                    console.error('Error adding product to wishlist:', error);
+                                    observer.next(false);
+                                    observer.complete();
+                                });
+                        } else {
+                          // Remove the product ID from the wishlist
+                          const index = currentWishlist.indexOf(product.id);
+                          if (index > -1) {
+                              currentWishlist.splice(index, 1);
+                          }
+                          userDocRef.update({ wishlist: currentWishlist })
+        .then(() => {
+            console.log('Product removed from wishlist successfully.');
+            observer.next(false); // Indicate that the product was removed
+            observer.complete();
+        })
+        .catch((error) => {
+            console.error('Error removing product from wishlist:', error);
+            observer.next(false); 
+            observer.complete();
+        });
+}
+                    } else {
+                        console.log('User document not found.');
+                        observer.next(false);
+                        observer.complete();
+                    }
                 });
             } else {
-              console.log('Product is already in the wishlist.');
+                console.log('User is not authenticated. Please log in to add to your wishlist.');
+                observer.next(false); 
+                observer.complete();
             }
-          } else {
-            console.log('User document not found.');
-          }
         });
-      } else {
-        console.log('User is not authenticated. Please log in to add to your wishlist.');
-      }
     });
 }
+
 
 
   getUserWishlistProducts(): Observable<Products[]> {

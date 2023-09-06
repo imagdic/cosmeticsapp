@@ -22,7 +22,10 @@ export class WishlistButtonComponent implements OnInit {
   }
 
   addToWishlist(product: Products) {
-    this.wishlistService.addToWishlist(product);
+    this.wishlistService.addToWishlist(product).subscribe(isAdded => {
+        // Update the isFavorite property based on the result
+        this.isFavorite = isAdded;
+    });
 }
 
   private checkIfProductIsInWishlist(): void {
