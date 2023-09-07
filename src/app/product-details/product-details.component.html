@@ -12,16 +12,15 @@
             <span class="brand"><i class="pi pi-chevron-right" style="padding-right: 5px;"></i>{{product.brand}}</span>
             <div class="category"><i class="pi pi-tag" style="padding-right: 5px;"></i>{{product.category}}</div>
         </div>
-
-        <div class="description-section">  
-            <div class="description">{{product.description}}</div>
-        </div>
-
         <div class="price-section">
             <span class="price">{{product.price | currency:'EUR'}}</span>
             <div class="favorite">
                 <app-wishlist-button [product]="product"></app-wishlist-button>
             </div>
+        </div>
+        <div class="description-section">
+            <div><h3>Product details:</h3></div>
+            <div class="description">{{product.description}}</div>
         </div>
     </div>
 </div>
