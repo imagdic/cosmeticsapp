@@ -23,8 +23,9 @@
     </div>
 </div>
 
+<h2>All products</h2>
 <ul class="image-grid">
-    <li *ngFor="let product of products">
+    <li *ngFor="let product of displayedProducts">
         <a [routerLink]="['/product', product.id]"><img src="{{product.imageUrl}}" alt="product images"></a>
         <div class="content">
             <div class="name">
@@ -44,5 +45,8 @@
         </div>
     </li>
 </ul>
+<div class="card flex justify-content-center">
+<p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="products.length" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
+</div>
 
 <!-- {{products | json}} -->

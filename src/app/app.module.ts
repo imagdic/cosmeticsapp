@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RatingModule } from 'primeng/rating';
+import { PaginatorModule } from 'primeng/paginator';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -33,6 +34,7 @@ import {StyleClassModule} from 'primeng/styleclass';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { WishlistButtonComponent } from './wishlist-button/wishlist-button.component';
 import { RatingComponent } from './rating/rating.component';
+import { CategoryComponent } from './product-category/category/category.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import { RatingComponent } from './rating/rating.component';
     ProductDetailsComponent,
     LoginComponent,
     RegistrationComponent,
-    RatingComponent
+    RatingComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +59,7 @@ import { RatingComponent } from './rating/rating.component';
     BrowserAnimationsModule,
     ToggleButtonModule,
     TableModule,
+    PaginatorModule,
     InputTextModule,
     StyleClassModule,
     TieredMenuModule,

@@ -1,0 +1,25 @@
+<div class="intro-section">
+<h2 *ngIf="categoryName">{{ categoryName }} Products</h2>
+</div>
+
+<ul class="image-grid">
+    <li *ngFor="let product of products">
+        <a [routerLink]="['/product', product.id]"><img src="{{product.imageUrl}}" alt="product images"></a>
+        <div class="content">
+            <div class="name">
+                {{product.name}}
+            </div>
+            <div class="favorite">
+                <app-wishlist-button [product]="product"></app-wishlist-button>
+             </div>
+             <div class="star">
+                <app-rating [(rating)]="product.rating" (ratingChange)="rateProduct(product.id, $event)"></app-rating>
+            </div>                  
+            <div class="product-item-footer">
+                <div class="category">{{product.brand}} | {{product.category}}
+                </div>
+                <div class="price">{{product.price | currency:'EUR'}}</div>
+            </div>
+        </div>
+    </li>
+</ul>

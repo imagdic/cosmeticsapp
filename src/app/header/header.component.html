@@ -3,9 +3,9 @@
         <a href="#" routerLink="/" class="logo">Croatian Cosmetics</a>
         <i class="pi pi-bars hamburger-icon" (click)="toggleMenu()"></i>
         <nav [class.active]="isMenuActive">
-            <button class="nav-btn">Hair</button>
-            <button class="nav-btn">Skin</button>
-            <button class="nav-btn">Body</button>
+            <button class="nav-btn" (click)="navigateToCategory('Hair Care')">Hair</button>
+            <button class="nav-btn" (click)="navigateToCategory('Skin Care')">Skin</button>
+            <button class="nav-btn" (click)="navigateToCategory('Body Care')">Body</button>
             <span class="p-input-icon-left">
                 <i class="pi pi-search"></i>
                 <input type="text" pInputText class="p-inputtext-sm"/>

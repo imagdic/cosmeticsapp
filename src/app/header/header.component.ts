@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { MenuItem } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,7 @@ export class HeaderComponent implements OnInit {
 
   items: MenuItem[] = []; // Initialized as empty
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   isMenuActive = false;
 
@@ -85,5 +86,9 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.authService.logout();
     this.setMenuItems(false); // Reset menu items after logout
+  }
+
+  navigateToCategory(category: string) {
+    this.router.navigate(['/category', category]);
   }
 }
