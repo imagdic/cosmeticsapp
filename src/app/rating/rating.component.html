@@ -1,3 +1,4 @@
 <div class="star">
     <p-rating [(ngModel)]="rating" [cancel]="false" (onRate)="onRatingChanged($event)"></p-rating>
+    <span class="rating-decimal" style="padding-left: 5px;">({{rating | number:'1.0-2'}})</span>
 </div>
