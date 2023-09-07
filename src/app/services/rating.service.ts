@@ -1,7 +1,7 @@
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +37,19 @@ export class RatingService {
   getProductRating(productId: string): Observable<any[]> {
     return this.firestore.collection('ratings', ref => ref.where('product', '==', productId)).valueChanges();
   }
+
+  getAverageProductRating(productId: string): Observable<number | null> {
+    return this.getProductRating(productId).pipe(
+      map(ratings => {
+        if (ratings && ratings.length > 0) {
+          const totalRatings = ratings.reduce((acc, rating) => acc + rating.rating, 0);
+          return totalRatings / ratings.length;
+        } 
+        return null;
+      })
+    );
+  }
+
   
 
 }

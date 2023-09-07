@@ -1,23 +1,26 @@
 <div class="container">
-    <div *ngIf="product">
-        <img [src]="product.imageUrl" [alt]="product.name">
-        <div class="details">
-            <div class="header">
-                <span class="name">
-                    {{product.name}}
-                </span>
-                <div class="favorite">
-                    <app-wishlist-button [product]="product"></app-wishlist-button>
-                </div>
-            </div>
-            <div class="star">
+    <div class="product-wrapper" *ngIf="product">
+        <div class="image-section">
+            <img [src]="product.imageUrl" [alt]="product.name">
+        </div>
+
+        <div class="name-rating-section">
+            <span class="name">{{product.name}}</span>
+            <div class="rating-wrapper">
                 <app-rating [(rating)]="product.rating" (ratingChange)="rateProduct(product.id, $event)"></app-rating>
             </div>
-            <div class="product-item-footer">
-                <div class="description">{{product.description}}</div>
-                <div class="brand">{{product.brand}}</div>
-                <div class="category">Category: {{product.category}}</div>
-                <div class="price">{{product.price | currency:'EUR'}}</div>
+            <span class="brand"><i class="pi pi-chevron-right" style="padding-right: 5px;"></i>{{product.brand}}</span>
+            <div class="category"><i class="pi pi-tag" style="padding-right: 5px;"></i>{{product.category}}</div>
+        </div>
+
+        <div class="description-section">  
+            <div class="description">{{product.description}}</div>
+        </div>
+
+        <div class="price-section">
+            <span class="price">{{product.price | currency:'EUR'}}</span>
+            <div class="favorite">
+                <app-wishlist-button [product]="product"></app-wishlist-button>
             </div>
         </div>
     </div>

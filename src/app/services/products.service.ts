@@ -63,7 +63,19 @@ export class ProductsService {
   }
 
   getProductsByCategory(category: string): Observable<Products[]> {
-    return this.firestore.collection<Products>('products', ref => ref.where('category', '==', category)).valueChanges();
+    return this.firestore.collection<Products>('products', ref => ref.where('category', '==', category))
+      .snapshotChanges()
+      .pipe(
+        map(actions => actions.map(a => {
+          const data = a.payload.doc.data() as Products;
+          const id = a.payload.doc.id;
+          return {
+            ...data,
+            id: id
+          };
+        }))
+      );
   }
+
 
 }

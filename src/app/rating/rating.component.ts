@@ -13,10 +13,7 @@ export class RatingComponent implements OnInit {
 
   onRatingChanged(event: any): void {
     console.log('onRatingChanged called with event:', event);
-
-    // If the event structure contains a 'value' property, extract it
     this.rating = event.value ? event.value : event;
-    
     console.log('Emitting rating value:', this.rating);
     this.ratingChange.emit(this.rating);
 }

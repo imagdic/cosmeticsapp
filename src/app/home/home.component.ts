@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
   rating!: string;
   first: number = 0;
   displayedProducts: Products[] = [];
+  averageRatings: { [key: string]: number | null } = {};
 
 
   rows: number = 10;
@@ -32,12 +33,19 @@ export class HomeComponent implements OnInit {
     private authService: AuthService, private router: Router) { }
 
 
-    ngOnInit(): void {
-      this.productsService.getProducts().subscribe((data: Products[]) => {
-        this.products = data;
-        this.updateDisplayedProducts(); // Call this whenever you update the products array
+  ngOnInit(): void {
+    this.productsService.getProducts().subscribe((products) => {
+      this.products = products;
+      this.updateDisplayedProducts();
+      products.forEach(product => {
+        if (product.id) {
+          this.ratingService.getAverageProductRating(product.id).subscribe(avgRating => {
+            this.averageRatings[product.id] = avgRating;
+          });
+        }
       });
-    }
+    });
+  }
 
   viewProductDetails(productId: string) {
     this.router.navigate(['/products', productId]);
@@ -53,15 +61,15 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  onPageChange(event: any) { // temporarily change type to any
-    console.log(event); // log the event object to inspect its structure
+  onPageChange(event: any) {
+    console.log(event);
     this.first = event.first;
     this.rows = event.rows;
     this.updateDisplayedProducts();
   }
 
-updateDisplayedProducts() {
-  this.displayedProducts = this.products.slice(this.first, this.first + this.rows);
-}
+  updateDisplayedProducts() {
+    this.displayedProducts = this.products.slice(this.first, this.first + this.rows);
+  }
 
 }
