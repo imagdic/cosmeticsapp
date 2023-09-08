@@ -1,102 +1,70 @@
-.image-grid {
-    display: flex;
-    flex-wrap: wrap;
-    list-style: none;
-    padding: 0;
-  }
-  
-  .image-grid li {
-    width: 20%; /* 5 slika u retku */
-    padding: 10px; /* Razmak oko box-eva */
-    box-sizing: border-box; /* Uključuje padding u ukupnu širinu */
-
-     /* Prilagodba na manjim ekranima */
-  @media (max-width: 768px) {
-    width: 50%; /* 2 slike u retku */
-  }
-
-  /* Prilagodba na još manjim ekranima */
-  @media (max-width: 480px) {
-    width: 100%; /* 1 slika u retku */
-  }
-  }
-  
-  .image-grid img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain; /* Prilagodi sliku proporcionalno unutar box-a */
-  }
-
-  ul li a{
-    height: 15rem;
-    width: 15rem;
-    border: 1px solid whitesmoke;
-    border-radius: 1rem;
-    margin: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    color: purple;
-}
-
-li a:hover{
-    opacity: 0.9;
-    cursor: pointer;
-}
-
-.content{
-  padding: .5rem 1rem;
-  position: relative;
-}
-
-//heart icon
-.favorite{
-  position: absolute;
-  top: .3rem;
-  right: 1rem;
-}
-::ng-deep {
-  .pi-heart{
-    color: purple;
-  }
-
-  .pi-heart:hover {
-    color: purple!important;
-}
-
-}
-
-//star icon
-.star{
-  margin-bottom: .2rem;
-  margin-top: .4rem;
-}
-
-.product-item-footer{
+.wishlist-container {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem;
   align-items: center;
+  justify-content: center;
+  background-color: #f6f6f6;  
+  width: 100%;
 }
 
-.category{
-  flex: 9;
-  border-radius: 2rem;
-  color: #6e6e6e;
-  font-size: .9rem;
-  margin-right: .3rem;
-  display: inline-block;
+.product-card {
+  display: flex;
+  gap: 2rem;
+  padding: 1.5rem;
+  align-items: center;
+  border: 1px solid #e1e1e1;
+  border-radius: 15px;
+  background-color: #ffffff;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  width: 100%;
 }
 
-.price{
+.image-section {
   flex: 1;
-  border-radius: 2rem;
-  color: #6e6e6e;
-  font-size: .9rem;
-  display: inline-block;
+  width: 150px;
+  height: 210px;
+  overflow: hidden;
+  border-radius: 15px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 15px;
+  }
 }
 
+.name-rating-section {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 
+.name {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
 
+.price-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-end;
+}
 
+.price {
+  font-size: 1.2rem;
+  color: #e44d26;
+}
 
-
+@media (max-width: 768px) {
+  .product-card {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

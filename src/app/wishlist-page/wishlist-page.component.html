@@ -1,35 +1,26 @@
-<div *ngFor="let product of wishlistProducts">
-    <ul>
-        <li>{{product.name}}</li>
-        <li>{{product.brand}}</li>
-    </ul>
-</div>
-
-
+<div class="wishlist-container">
+    <div *ngFor="let product of wishlistProducts" class="product-card">
+      <div class="image-section">
+        <a [routerLink]="['/product', product.id]">
+          <img src="{{product.imageUrl}}" alt="{{product.name}}">
+        </a>
+      </div>
   
-
-
-
-<!-- <div *ngFor="let product of wishlist$ | async">
-    <table class="image-grid">
-        <tr>
-            <a routerLink="/product/{{product.id}}"><img src="{{product.imageUrl}}" alt="product images"></a>
-            <div class="content">
-                <td class="name">
-                    {{product.name}}
-                </td>
-                <td class="star">
-                    <p-rating [(ngModel)]="product.rating" [cancel]="false"></p-rating>
-                </td>
-                <div class="product-item-footer">
-                    <td class="category">{{product.brand}} | {{product.category}}
-                    </td>
-                    <td class="price">{{product.price | currency:'EUR'}}</td>
-                </div>
-            </div>
-            <td><p-button icon="pi pi-times" styleClass="p-button-rounded p-button-danger p-button-outlined" 
-    (click)="removeFromWishlist(product)"></p-button></td>
-    </table>
-</div>
-
-   -->
+      <div class="name-rating-section">
+        <span class="name">{{product.name}}</span>
+        <div class="rating-wrapper">
+          <app-rating [(rating)]="product.rating" [rating]="averageRatings[product.id] ?? 0" (ratingChange)="rateProduct(product.id, $event)"></app-rating>
+        </div>
+        <span class="brand"><i class="pi pi-chevron-right" style="padding-right: 5px;"></i>{{product.brand}}</span>
+        <div class="category"><i class="pi pi-tag" style="padding-right: 5px;"></i>{{product.category}}</div>
+      </div>
+  
+      <div class="price-section">
+        <span class="price">{{product.price | currency:'EUR'}}</span>
+        <div class="favorite">
+          <app-wishlist-button [product]="product"></app-wishlist-button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
