@@ -14,6 +14,11 @@ header {
     align-items: center; // vertically centers the elements
 }
 
+.logo {
+    font-family: 'Amita', cursive;
+    font-size: 1.5rem !important;
+}
+
 a.logo {
     color: #883cae;
     font-weight: bold;
@@ -60,6 +65,10 @@ nav {
         display: block;
     }
 
+    .logo {
+        font-size: 1.5rem;
+    }
+
     nav {
         display: none; 
         flex-direction: column;
@@ -81,3 +90,49 @@ nav {
     }
     
 }
+
+.search-wrapper {
+    position: relative;
+    width: 250px;  // Adjust width to your needs
+
+    input[type="text"] {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #883cae; // A border that matches your theme
+        border-radius: 4px 4px 0 0; // Top rounded corners
+        font-size: 1rem;
+    }
+
+    .dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        border: 1px solid #883cae;
+        border-top: none; // This makes it feel like an integrated part of the search bar
+        background-color: white;
+        border-radius: 0 0 4px 4px; // Bottom rounded corners
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 2;
+        max-height: 250px; // Adjust to your needs
+        overflow-y: auto;
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        li {
+            padding: 0.5rem;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #f5f5f5;
+                color: #883cae;
+            }
+        }
+    }
+}
+
+

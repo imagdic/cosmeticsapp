@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RatingModule } from 'primeng/rating';
 import { PaginatorModule } from 'primeng/paginator';
+import { DropdownModule } from 'primeng/dropdown';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -63,6 +64,7 @@ import { CategoryComponent } from './product-category/category/category.componen
     InputTextModule,
     StyleClassModule,
     TieredMenuModule,
+    DropdownModule,
     PasswordModule,
     ReactiveFormsModule,
     AngularFireModule,

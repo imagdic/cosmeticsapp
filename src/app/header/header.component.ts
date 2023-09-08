@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { MenuItem } from 'primeng/api';
 import { Router } from '@angular/router';
+import { ProductsService } from '../services/products.service';
 
 @Component({
   selector: 'app-header',
@@ -11,10 +12,14 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   user: any;
   userEmail: string | null = null;
+  items: MenuItem[] = [];
+  selectedProduct: any;
+  searchValue: string = '';
+  productsForDropdown: any[] = [];
+  searchTimeout: any;
 
-  items: MenuItem[] = []; // Initialized as empty
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private productService: ProductsService) { }
 
   isMenuActive = false;
 
@@ -41,7 +46,7 @@ export class HeaderComponent implements OnInit {
 
   toggleMenu(): void {
     this.isMenuActive = !this.isMenuActive;
-}
+  }
 
   setMenuItems(isAuthenticated: boolean): void {
     if (isAuthenticated) {
@@ -66,16 +71,7 @@ export class HeaderComponent implements OnInit {
     } else {
       this.items = [
         {
-          label: 'User',
-          icon: 'pi pi-user',
-        },
-        {
-          label: 'Wishlist',
-          icon: 'pi pi-fw pi-heart',
-          routerLink: '/wishlist',
-        },
-        {
-          label: 'Login',
+          label: 'Login or register',
           icon: 'pi pi-sign-in',
           routerLink: '/login'
         }
@@ -91,4 +87,29 @@ export class HeaderComponent implements OnInit {
   navigateToCategory(category: string) {
     this.router.navigate(['/category', category]);
   }
+
+  onSearch(inputValue: string): void {
+      if (inputValue && inputValue.trim() !== '') {
+          this.productService.searchProductsByName(inputValue).subscribe(products => {
+              this.productsForDropdown = products;
+          });
+      } else {
+          this.productsForDropdown = [];
+      }
+  }
+  
+
+  onProductSelect(product: any): void {
+    this.selectedProduct = product;
+    this.productsForDropdown = [];  // Clear the dropdown once a product is selected
+
+    // Navigate to ProductDetailsComponent with the selected product id.
+    if (this.selectedProduct && this.selectedProduct.id) {
+        this.router.navigate(['/product', this.selectedProduct.id]);
+    }
+}
+
+
+
+
 }
