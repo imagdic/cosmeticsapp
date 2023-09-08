@@ -91,6 +91,12 @@ nav {
     
 }
 
+ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
 .search-wrapper {
     position: relative;
     width: 250px;  // Adjust width to your needs
@@ -100,7 +106,7 @@ nav {
         padding: 0.5rem;
         border: 1px solid #883cae; // A border that matches your theme
         border-radius: 4px 4px 0 0; // Top rounded corners
-        font-size: 1rem;
+        font-size: .8rem;
     }
 
     .dropdown {
