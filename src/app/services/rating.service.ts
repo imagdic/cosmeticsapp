@@ -1,7 +1,7 @@
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
-import { Observable, map } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,7 @@ export class RatingService {
   constructor(private firestore: AngularFirestore, private authService: AuthService) { }
 
   rateProduct(productId: string, ratingValue: number): void {
+    console.log(`Rating product with ID: ${productId} with value: ${ratingValue}`);
     this.authService.getCurrentUser().subscribe(user => {
       if(user && productId && (ratingValue !== undefined)) {
         const userId = user.uid;
@@ -35,7 +36,13 @@ export class RatingService {
   
 
   getProductRating(productId: string): Observable<any[]> {
-    return this.firestore.collection('ratings', ref => ref.where('product', '==', productId)).valueChanges();
+    return this.firestore.collection('ratings', ref => ref.where('product', '==', productId))
+    .valueChanges()
+    .pipe(
+      tap(ratings => {
+       // console.log(`Fetched ratings for product with ID: ${productId}`, ratings);
+      })
+    );
   }
 
   getAverageProductRating(productId: string): Observable<number | null> {
@@ -43,12 +50,14 @@ export class RatingService {
       map(ratings => {
         if (ratings && ratings.length > 0) {
           const totalRatings = ratings.reduce((acc, rating) => acc + rating.rating, 0);
-          return totalRatings / ratings.length;
+          const average = totalRatings / ratings.length;
+          return average;
         } 
         return null;
       })
     );
   }
+  
 
   
 

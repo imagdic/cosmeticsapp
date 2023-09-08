@@ -35,7 +35,7 @@
                 <app-wishlist-button [product]="product"></app-wishlist-button>
              </div>
              <div class="star">
-                <app-rating [(rating)]="product.rating" (ratingChange)="rateProduct(product.id, $event)"></app-rating>
+                <app-rating [productId]="product.id" (ratingChange)="handleRatingChange(product.id, $event)"></app-rating>
             </div>                  
             <div class="product-item-footer">
                 <div class="category">{{product.brand}} | {{product.category}}

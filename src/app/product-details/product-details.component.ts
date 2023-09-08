@@ -13,7 +13,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class ProductDetailsComponent implements OnInit{
   product: Products | undefined;
-  averageRating: number | null = null;
+  averageRatings: { [key: string]: number | null } = {};
 
   
   constructor(private activatedRoute: ActivatedRoute, private productService: ProductsService, 
@@ -26,25 +26,16 @@ export class ProductDetailsComponent implements OnInit{
       if (productId) {
         this.productService.getProductById(productId).subscribe((product) => {
           this.product = product;
-
-          // After setting the product, get its average rating
-          this.ratingService.getAverageProductRating(productId).subscribe(avgRating => {
-            this.averageRating = avgRating;
-          });
         });
       }
     });
   }
 
-
-rateProduct(productId: string, ratingValue: number): void {
-  this.authService.isAuthenticated().subscribe(isAuthenticated => {
-      if (!isAuthenticated) {
-          alert('Please log in to leave a review!');
-          return;
-      }
-      this.ratingService.rateProduct(productId, ratingValue);
-  });
+  handleRatingChange(productId: string, newRatingValue: number): void {
+    console.log(`Product with ID: ${productId} received a new rating of ${newRatingValue}`);
+    this.ratingService.getAverageProductRating(productId).subscribe(avgRating => {
+        this.averageRatings[productId] = avgRating;
+    });
 }
   
 }

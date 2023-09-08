@@ -42,18 +42,12 @@ export class CategoryComponent implements OnInit {
   }
   
   
-
-  rateProduct(productId: string, ratingValue: number): void {
-    console.log('Rating product with ID:', productId);
-    this.authService.isAuthenticated().subscribe(isAuthenticated => {
-      if (!isAuthenticated) {
-        alert('Please log in to leave a review!');
-        return;
-      }
-      this.ratingService.rateProduct(productId, ratingValue);
-      console.log(productId)
+  handleRatingChange(productId: string, newRatingValue: number): void {
+    console.log(`Product with ID: ${productId} received a new rating of ${newRatingValue}`);
+    this.ratingService.getAverageProductRating(productId).subscribe(avgRating => {
+        this.averageRatings[productId] = avgRating;
     });
-  }
+}
 
   viewProductDetails(productId: string) {
     this.router.navigate(['/products', productId]);

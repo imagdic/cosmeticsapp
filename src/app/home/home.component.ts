@@ -37,28 +37,11 @@ export class HomeComponent implements OnInit {
     this.productsService.getProducts().subscribe((products) => {
       this.products = products;
       this.updateDisplayedProducts();
-      products.forEach(product => {
-        if (product.id) {
-          this.ratingService.getAverageProductRating(product.id).subscribe(avgRating => {
-            this.averageRatings[product.id] = avgRating;
-          });
-        }
-      });
     });
   }
 
   viewProductDetails(productId: string) {
     this.router.navigate(['/products', productId]);
-  }
-
-  rateProduct(productId: string, ratingValue: number): void {
-    this.authService.isAuthenticated().subscribe(isAuthenticated => {
-      if (!isAuthenticated) {
-        alert('Please log in to leave a review!');
-        return;
-      }
-      this.ratingService.rateProduct(productId, ratingValue);
-    });
   }
 
   onPageChange(event: any) {
@@ -71,5 +54,12 @@ export class HomeComponent implements OnInit {
   updateDisplayedProducts() {
     this.displayedProducts = this.products.slice(this.first, this.first + this.rows);
   }
+  
+  handleRatingChange(productId: string, newRatingValue: number): void {
+    console.log(`Product with ID: ${productId} received a new rating of ${newRatingValue}`);
+    this.ratingService.getAverageProductRating(productId).subscribe(avgRating => {
+        this.averageRatings[productId] = avgRating;
+    });
+}
 
 }
