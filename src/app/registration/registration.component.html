@@ -1,21 +1,22 @@
-
-<div class="surface-card p-4 shadow-2 border-round w-full lg:w-6 align-items-center">
-    <div class="text-center mb-5">
-        <img src="\assets\cc-logo.png" alt="Image" height="50" class="mb-3">
-        <div class="text-900 text-3xl font-medium mb-3">Welcome</div>
-        <span class="text-600 font-medium line-height-3">Already have an account?</span>
-        <a class="font-medium no-underline ml-2 text-blue-500 cursor-pointer" href="/login">Login here!</a>
+<div class="center-screen">
+<div class="surface-card p-6 shadow-2 border-round w-full lg:w-6 align-items-center">
+    <div class="text-center mb-6">
+        <img src="\assets\cc-logo.png" alt="Image" height="60" class="mb-4">
+        <div class="text-900 text-3xl font-semibold mb-4">Welcome</div>
+        <span class="text-700 font-medium line-height-4">Already have an account?</span>
+        <a class="font-medium no-underline ml-2 text-blue-600 cursor-pointer" href="/login">Login here!</a>
     </div>
 
-    <div [formGroup]="registerForm">
-        <label for="email1" class="block text-900 font-medium mb-2">Email</label>
-        <input id="email1" type="text" placeholder="Email address" pInputText class="w-full mb-3" formControlName="email">
-        <small class="p-error block" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.dirty">Email is required</small> 
+    <div [formGroup]="registerForm" class="mb-5">
+        <label for="email1" class="block text-900 font-medium mb-3">Email</label>
+        <input id="email1" type="text" placeholder="Email address" pInputText class="w-full mb-4 py-2" formControlName="email">
+        <small class="p-error block mb-3" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.dirty">Email is required</small> 
 
-        <label for="password1" class="block text-900 font-medium mb-2">Password</label>
-        <input id="password1" type="password" placeholder="Password" pInputText class="w-full mb-3" formControlName="password">
-        <small class="p-error block" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.dirty">Password is required</small> 
+        <label for="password1" class="block text-900 font-medium mb-3">Password</label>
+        <input id="password1" type="password" placeholder="Password" pInputText class="w-full mb-4 py-2" formControlName="password">
+        <small class="p-error block mb-4" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.dirty">Password is required</small> 
 
-        <button (click)="registerWithEmail()" pButton pRipple label="Register" icon="pi pi-user" class="w-full" [disabled]="registerForm.invalid"></button>
+        <button (click)="registerWithEmail()" pButton pRipple label="Register" icon="pi pi-user" class="w-full py-2" [disabled]="registerForm.invalid"></button>
     </div>
+</div>
 </div>
