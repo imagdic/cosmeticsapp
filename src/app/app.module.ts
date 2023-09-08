@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RatingModule } from 'primeng/rating';
 import { PaginatorModule } from 'primeng/paginator';
-import { MessagesModule } from 'primeng/messages';
-import { MessageModule } from 'primeng/message';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -62,8 +60,6 @@ import { CategoryComponent } from './product-category/category/category.componen
     ToggleButtonModule,
     TableModule,
     PaginatorModule,
-    MessagesModule,
-    MessageModule,
     InputTextModule,
     StyleClassModule,
     TieredMenuModule,

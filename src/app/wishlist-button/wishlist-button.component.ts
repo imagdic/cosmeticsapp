@@ -14,7 +14,6 @@ export class WishlistButtonComponent implements OnInit {
   isFavorite: boolean = false;
   isDisabled: boolean = false;
 
-
   constructor(private authService: AuthService, private wishlistService: WishlistService, private db: AngularFirestore) { }
 
   ngOnInit(): void {
@@ -32,7 +31,6 @@ export class WishlistButtonComponent implements OnInit {
       }
     });
   }
-  
 
   private checkIfProductIsInWishlist(): void {
     if (this.product) {

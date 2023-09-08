@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { RatingService } from '../services/rating.service';
-import { Message } from 'primeng/api';
 
 @Component({
   selector: 'app-rating',
@@ -15,17 +14,16 @@ export class RatingComponent implements OnInit {
   averageRating: number | null = null;
   userRating: number | null = null;
   isAuthenticated: boolean = false;
-  messages: Message[] = [];
-  
+
   constructor(private ratingService: RatingService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.fetchAverageRating();
 
     this.authService.getAuthState().subscribe(user => {
-        this.isAuthenticated = !!user;
+      this.isAuthenticated = !!user;
     });
-}
+  }
   fetchAverageRating(): void {
     this.ratingService.getAverageProductRating(this.productId).subscribe(average => {
       this.averageRating = average;
@@ -39,14 +37,13 @@ export class RatingComponent implements OnInit {
     this.userRating = newRating;
 
     this.authService.getAuthState().subscribe(user => {
-        if (user) {
-            this.ratingService.rateProduct(this.productId, newRating);
-            this.messages.push({ severity: 'success', summary: 'Success', detail: 'Thank you for your rating!' });
-            console.log(this.messages);
-        } else {
-            this.messages.push({ severity: 'warn', summary: 'Warning', detail: 'Please login to rate this product.' });
-        }
+      if (user) {
+        this.ratingService.rateProduct(this.productId, newRating);
+        alert('Thank you for rating this!');
+      } else {
+        alert('Please login to rate this product.');
+      }
     });
-}
+  }
 
 }
