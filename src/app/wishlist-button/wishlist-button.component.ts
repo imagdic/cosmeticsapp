@@ -22,11 +22,17 @@ export class WishlistButtonComponent implements OnInit {
   }
 
   addToWishlist(product: Products) {
-    this.wishlistService.addToWishlist(product).subscribe(isAdded => {
-        // Update the isFavorite property based on the result
-        this.isFavorite = isAdded;
+    this.authService.getAuthState().subscribe((user) => {
+      if (user) {
+        this.wishlistService.addToWishlist(product).subscribe(isAdded => {
+          this.isFavorite = isAdded;
+        });
+      } else {
+        alert("Please log in to add to wishlist");
+      }
     });
-}
+  }
+  
 
   private checkIfProductIsInWishlist(): void {
     if (this.product) {
