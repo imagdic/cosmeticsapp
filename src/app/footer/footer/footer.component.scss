@@ -1,0 +1,41 @@
+footer {
+    background-color: #f6f6f6;
+    padding: 1rem 2rem;
+    border-top: 1px solid #883cae;
+    position: relative;
+}
+
+.footer-container {
+    max-width: 100%;
+    padding: .5rem;
+    margin: 0 auto;
+    display: flex;          /* Added this */
+    justify-content: center; /* Center content horizontally */
+    align-items: center;     /* Center content vertically */
+    height: 100%;           /* Take full height of the parent */
+    flex-wrap: wrap;
+}
+
+.footer-logo {
+    font-family: 'Amita', cursive;
+    font-size: 1.5rem;
+    color: #883cae;
+    font-weight: bold;
+    padding: 0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-logo:hover {
+    color: darken(rgb(136, 60, 174), 10%);
+}
+
+@media screen and (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+    }
+
+    .footer-logo {
+        margin-bottom: 1rem;
+    }
+}

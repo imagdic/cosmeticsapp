@@ -36,6 +36,7 @@ import { TieredMenuModule } from 'primeng/tieredmenu';
 import { WishlistButtonComponent } from './wishlist-button/wishlist-button.component';
 import { RatingComponent } from './rating/rating.component';
 import { CategoryComponent } from './product-category/category/category.component';
+import { FooterComponent } from './footer/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { CategoryComponent } from './product-category/category/category.componen
     LoginComponent,
     RegistrationComponent,
     RatingComponent,
-    CategoryComponent
+    CategoryComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
