@@ -1,6 +1,6 @@
 header {
     background-color: white;
-    padding: 1rem 2rem;  // Adding some padding for better appearance
+    padding: 1rem 2rem; 
     border-bottom: 1px solid #883cae;
     position: relative;
 }
@@ -11,7 +11,7 @@ header {
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
-    align-items: center; // vertically centers the elements
+    align-items: center;
 }
 
 .logo {
@@ -24,8 +24,8 @@ a.logo {
     font-weight: bold;
     padding: 0;
     text-decoration: none;
-    font-size: 1.5rem; // making the logo slightly larger
-    transition: color 0.3s ease; // smooth transition for hover effect
+    font-size: 1.5rem;
+    transition: color 0.3s ease; 
 }
 
 nav {
@@ -54,7 +54,7 @@ nav {
 }
 
 .hamburger-icon {
-    display: none; // hidden by default, will show for mobile
+    display: none;
     cursor: pointer;
     font-size: 1.5rem;
     color: #555;
@@ -99,13 +99,13 @@ ul {
 
 .search-wrapper {
     position: relative;
-    width: 250px;  // Adjust width to your needs
+    width: 250px; 
 
     input[type="text"] {
         width: 100%;
         padding: 0.5rem;
-        border: 1px solid #883cae; // A border that matches your theme
-        border-radius: 4px 4px 0 0; // Top rounded corners
+        border: 1px solid #883cae;
+        border-radius: 4px 4px 0 0; 
         font-size: .8rem;
     }
 
@@ -115,12 +115,12 @@ ul {
         left: 0;
         width: 100%;
         border: 1px solid #883cae;
-        border-top: none; // This makes it feel like an integrated part of the search bar
+        border-top: none; 
         background-color: white;
-        border-radius: 0 0 4px 4px; // Bottom rounded corners
+        border-radius: 0 0 4px 4px; 
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         z-index: 2;
-        max-height: 250px; // Adjust to your needs
+        max-height: 250px;
         overflow-y: auto;
 
         ul {

@@ -41,7 +41,6 @@ export class RatingComponent implements OnInit {
         this.ratingService.rateProduct(this.productId, newRating);
         alert('Thank you for rating this!');
       } else {
-        alert('Please login to rate this product.');
       }
     });
   }
