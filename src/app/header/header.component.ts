@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, HostListener } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { MenuItem } from 'primeng/api';
 import { Router } from '@angular/router';
@@ -9,6 +9,7 @@ import { ProductsService } from '../services/products.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
+
 export class HeaderComponent implements OnInit {
   user: any;
   userEmail: string | null = null;
@@ -19,7 +20,8 @@ export class HeaderComponent implements OnInit {
   searchTimeout: any;
 
 
-  constructor(private authService: AuthService, private router: Router, private productService: ProductsService) { }
+  constructor(private authService: AuthService, private router: Router, private productService: ProductsService, 
+    private elRef: ElementRef) { }
 
   isMenuActive = false;
 
@@ -109,7 +111,11 @@ export class HeaderComponent implements OnInit {
     }
 }
 
-
-
+@HostListener('document:click', ['$event'])
+onDocumentClick(event: MouseEvent): void {
+  if (!this.elRef.nativeElement.contains(event.target) && this.isMenuActive) {
+      this.isMenuActive = false;
+  }
+}
 
 }

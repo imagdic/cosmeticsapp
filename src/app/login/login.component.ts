@@ -37,7 +37,7 @@ export class LoginComponent {
       })
       .catch((error: any) => {
         console.error(error);
-        alert('Something went wrong');
+        alert('User does not exist. Please register first!');
         this.router.navigate(['/login']);
       });
   }
