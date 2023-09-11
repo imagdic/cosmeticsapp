@@ -32,7 +32,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
 import {StyleClassModule} from 'primeng/styleclass';
-import { TieredMenuModule } from 'primeng/tieredmenu';
+import { MenubarModule } from 'primeng/menubar';
 import { WishlistButtonComponent } from './wishlist-button/wishlist-button.component';
 import { RatingComponent } from './rating/rating.component';
 import { CategoryComponent } from './product-category/category/category.component';
@@ -65,7 +65,7 @@ import { FooterComponent } from './footer/footer/footer.component';
     PaginatorModule,
     InputTextModule,
     StyleClassModule,
-    TieredMenuModule,
+    MenubarModule,
     DropdownModule,
     PasswordModule,
     ReactiveFormsModule,

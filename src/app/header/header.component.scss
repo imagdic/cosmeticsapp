@@ -1,22 +1,17 @@
 header {
     background-color: white;
-    padding: 1rem 2rem; 
-    border-bottom: 1px solid #883cae;
+    padding: 0rem 0rem;
     position: relative;
 }
 
 .container {
-    max-width: 100%;
-    padding: .5rem;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    text-align: left;
+    font-size: 3rem;
 }
 
 .logo {
     font-family: 'Amita', cursive;
-    font-size: 1.5rem !important;
+    margin: 2rem;
 }
 
 a.logo {
@@ -25,94 +20,25 @@ a.logo {
     padding: 0;
     text-decoration: none;
     font-size: 1.5rem;
-    transition: color 0.3s ease; 
+    transition: color 0.3s ease;
 }
 
-nav {
-    display: flex;
-    align-items: center;
-
-    .nav-btn {
-        margin: 0 0.5rem;
-        padding: 0.5rem 1rem;
-        border: none;
-        border-radius: 4px;
-        color: #555;
-    }
-
-    .nav-btn:hover {
-        color: darken(rgb(136, 60, 174), 10%);
-    }
-
-    .profile-link {
-        padding: 0.5rem 1rem;
-        display: inline-block;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-}
-
-.hamburger-icon {
-    display: none;
-    cursor: pointer;
-    font-size: 1.5rem;
-    color: #555;
-}
 
 @media screen and (max-width: 768px) {
-    .hamburger-icon {
-        display: block;
+    .container{
+        text-align: center;
     }
-
-    .logo {
-        font-size: 1.5rem;
-    }
-
-    nav {
-        display: none; 
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        right: 0;
-        background-color: white;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    nav.active {
-        display: flex;
-    }
-
-    nav .nav-btn, nav .search-bar, .profile-link {
-        margin: 0.5rem 0;
-    }
-    
-}
-
-@media screen and (max-width: 480px) {
-    ::ng-deep .profile-dropdown p-tieredMenu { 
-        right: 0;
-        top: 0;
-    }
-}
-
-ul {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
 }
 
 .search-wrapper {
     position: relative;
-    width: 250px; 
+    width: 250px;
 
     input[type="text"] {
         width: 100%;
         padding: 0.5rem;
         border: 1px solid #883cae;
-        border-radius: 4px 4px 0 0; 
+        border-radius: 4px 4px 0 0;
         font-size: .8rem;
     }
 
@@ -122,9 +48,9 @@ ul {
         left: 0;
         width: 100%;
         border: 1px solid #883cae;
-        border-top: none; 
+        border-top: none;
         background-color: white;
-        border-radius: 0 0 4px 4px; 
+        border-radius: 0 0 4px 4px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         z-index: 2;
         max-height: 250px;
@@ -147,5 +73,3 @@ ul {
         }
     }
 }
-
-

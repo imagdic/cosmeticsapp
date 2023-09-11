@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
   searchTimeout: any;
 
 
-  constructor(private authService: AuthService, private router: Router, private productService: ProductsService, 
+  constructor(private authService: AuthService, private router: Router, private productService: ProductsService,
     private elRef: ElementRef) { }
 
   isMenuActive = false;
@@ -32,11 +32,6 @@ export class HeaderComponent implements OnInit {
           this.user = user;
           this.userEmail = user ? user.email : null;
           this.setMenuItems(true);
-          if (this.user) {
-            this.items[0].label = this.user.email;
-          } else {
-            this.items[0].label = 'User';
-          }
         });
       } else {
         this.user = null;
@@ -46,35 +41,57 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  toggleMenu(): void {
-    this.isMenuActive = !this.isMenuActive;
-  }
+
 
   setMenuItems(isAuthenticated: boolean): void {
     if (isAuthenticated) {
       this.items = [
         {
-          label: 'User', // Default label
+          label: 'Hair',
+          command: (event) => { this.navigateToCategory('Hair Care'); }
+        },
+        {
+          label: 'Skin',
+          command: (event) => { this.navigateToCategory('Skin Care'); }
+        },
+        {
+          label: 'Body',
+          command: (event) => { this.navigateToCategory('Body Care'); }
+        },
+        {
+          label: this.user ? this.user.email : 'User',
           icon: 'pi pi-user',
-        },
-        {
-          label: 'Wishlist',
-          icon: 'pi pi-fw pi-heart',
-          routerLink: '/wishlist',
-        },
-        {
-          label: 'Logout',
-          icon: 'pi pi-power-off',
-          command: () => {
-            this.logout();
-          }
+          items: [
+            {
+              label: 'Wishlist',
+              icon: 'pi pi-fw pi-heart',
+              routerLink: '/wishlist'
+            },
+            {
+              label: 'Logout',
+              icon: 'pi pi-power-off',
+              command: () => { this.logout(); }
+            }
+          ]
         }
       ];
     } else {
       this.items = [
         {
-          label: 'Login or register',
-          icon: 'pi pi-sign-in',
+          label: 'Hair',
+          command: (event) => { this.navigateToCategory('Hair Care'); }
+        },
+        {
+          label: 'Skin',
+          command: (event) => { this.navigateToCategory('Skin Care'); }
+        },
+        {
+          label: 'Body',
+          command: (event) => { this.navigateToCategory('Body Care'); }
+        },
+        {
+          label: 'Login',
+          icon: 'pi pi-user',
           routerLink: '/login'
         }
       ];
@@ -83,7 +100,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authService.logout();
-    this.setMenuItems(false); // Reset menu items after logout
+    this.setMenuItems(false);
   }
 
   navigateToCategory(category: string) {
@@ -91,31 +108,30 @@ export class HeaderComponent implements OnInit {
   }
 
   onSearch(inputValue: string): void {
-      if (inputValue && inputValue.trim() !== '') {
-          this.productService.searchProductsByName(inputValue).subscribe(products => {
-              this.productsForDropdown = products;
-          });
-      } else {
-          this.productsForDropdown = [];
-      }
+    if (inputValue && inputValue.trim() !== '') {
+      this.productService.searchProductsByName(inputValue).subscribe(products => {
+        this.productsForDropdown = products;
+      });
+    } else {
+      this.productsForDropdown = [];
+    }
   }
-  
+
 
   onProductSelect(product: any): void {
     this.selectedProduct = product;
-    this.productsForDropdown = [];  // Clear the dropdown once a product is selected
+    this.productsForDropdown = [];
 
-    // Navigate to ProductDetailsComponent with the selected product id.
     if (this.selectedProduct && this.selectedProduct.id) {
-        this.router.navigate(['/product', this.selectedProduct.id]);
+      this.router.navigate(['/product', this.selectedProduct.id]);
     }
-}
-
-@HostListener('document:click', ['$event'])
-onDocumentClick(event: MouseEvent): void {
-  if (!this.elRef.nativeElement.contains(event.target) && this.isMenuActive) {
-      this.isMenuActive = false;
   }
-}
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    if (!this.elRef.nativeElement.contains(event.target) && this.isMenuActive) {
+      this.isMenuActive = false;
+    }
+  }
 
 }

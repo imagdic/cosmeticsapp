@@ -1,18 +1,34 @@
 /* Introductory Section */
 .intro-section {
-  background-color: #f6f6f6;
+  background-image: url('/assets/bb.png');
+  background-size: cover; // Ovo će osigurati da se slika prilagodi veličini .intro-section
+    background-position: center; // Centrira sliku
+    background-repeat: no-repeat;
+    position: relative;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.3); // Poluprozirna crna boja
+        z-index: -1; // Postavlja pseudo-element ispod sadržaja .intro-section
+    }
+    
     padding: 2rem;
     margin-top: 0; // or adjust this value based on your header's height
     text-align: center;
   
   h1 {
       color: #883cae;
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       margin-bottom: 1rem;
   }
 
   p {
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: #555; 
       margin-bottom: 2rem;
   }

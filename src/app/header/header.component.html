@@ -1,14 +1,14 @@
 <header>
-    <div class="container">
-        <a href="#" routerLink="/" class="logo">Croatian Cosmetics</a>
-        <i class="pi pi-bars hamburger-icon" (click)="toggleMenu()"></i>
-        <nav [class.active]="isMenuActive">
-            <button class="nav-btn" (click)="navigateToCategory('Hair Care')">Hair</button>
-            <button class="nav-btn" (click)="navigateToCategory('Skin Care')">Skin</button>
-            <button class="nav-btn" (click)="navigateToCategory('Body Care')">Body</button>
-            <div class="search-wrapper">
-            <input type="text" #searchInput (input)="onSearch(searchInput.value)" placeholder="Search products...">
-            <!-- Dropdown for search results -->
+  <div class="container">
+    <a href="#" routerLink="/" class="logo">Croatian Cosmetics</a>
+    <div class="card">
+      <p-menubar class="menubar" [model]="items">
+        <ng-template pTemplate="start">
+        </ng-template>
+        <ng-template pTemplate="end">
+          <input type="text" pInputText #searchInput (input)="onSearch(searchInput.value)" placeholder="Search"
+            class="w-full" />
+          <div class="search-wrapper">
             <div *ngIf="productsForDropdown.length">
               <ul class="dropdown">
                 <li *ngFor="let product of productsForDropdown" (click)="onProductSelect(product)">
@@ -16,14 +16,11 @@
                 </li>
               </ul>
             </div>
-            </div> 
-
-            <div class="profile-dropdown">
-                <span class="profile-link" (click)="menu.toggle($event)">
-                    <i class="pi pi-user"></i>
-                </span>
-                <p-tieredMenu #menu [model]="items" [popup]="true"></p-tieredMenu>
-            </div>
-        </nav>
+          </div>
+        </ng-template>
+      </p-menubar>
     </div>
+  </div>
+
 </header>
+
