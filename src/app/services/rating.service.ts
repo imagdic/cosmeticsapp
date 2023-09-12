@@ -38,11 +38,6 @@ export class RatingService {
   getProductRating(productId: string): Observable<any[]> {
     return this.firestore.collection('ratings', ref => ref.where('product', '==', productId))
     .valueChanges()
-    .pipe(
-      tap(ratings => {
-       // console.log(`Fetched ratings for product with ID: ${productId}`, ratings);
-      })
-    );
   }
 
   getAverageProductRating(productId: string): Observable<number | null> {

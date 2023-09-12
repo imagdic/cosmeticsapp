@@ -10,17 +10,11 @@ export class FirestoreService {
   constructor(private firestore: AngularFirestore, private afAuth: AngularFireAuth) { }
 
   addUserToFirestore(uid: string, userData: any) {
-    const { email } = userData; // Destructure both 'email' and 'username' from userData.
+    const { email } = userData; 
   
     return this.firestore.collection('users').doc(uid).set({
       email
     });
   }
 
-  createWishlistForUser(userId: string) {
-    const userRef = this.firestore.collection('users').doc(userId);
-
-    // Create the "wishlist" subcollection within the user's document
-    userRef.collection('wishlist');
-  }
 }

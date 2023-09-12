@@ -29,7 +29,6 @@ export class ProductsService {
                   ...productData,
                   id: productId,
                   rating: averageRating,
-                  favorite: false // This is hardcoded as per your example
                 } as Products;
               })
             );
@@ -78,28 +77,28 @@ export class ProductsService {
   }
 
   searchProductsByName(searchValue: string): Observable<any[]> {
-    return this.firestore.collection('products', ref => 
-        ref.where('name', '>=', searchValue)
+    return this.firestore.collection('products', ref =>
+      ref.where('name', '>=', searchValue)
         .where('name', '<=', searchValue + '\uf8ff')
     ).snapshotChanges()
-    .pipe(
+      .pipe(
         map(actions => {
-            const products = actions.map(a => {
-                const data = a.payload.doc.data() as any;
-                const id = a.payload.doc.id;
-                return { id, ...data };
-            });
-            console.log('Products found:', products); 
-            return products;
+          const products = actions.map(a => {
+            const data = a.payload.doc.data() as any;
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          });
+          console.log('Products found:', products);
+          return products;
         }),
         catchError(error => {
-            console.error('Error fetching products:', error);  // Log the error
-            return throwError(error);  // Re-throw the error to handle it elsewhere if needed
+          console.error('Error fetching products:', error);  // Log the error
+          return throwError(error);  // Re-throw the error to handle it elsewhere if needed
         })
-    );
-}
+      );
+  }
 
-  
+
 
 
 }

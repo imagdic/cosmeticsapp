@@ -10,8 +10,8 @@ import { ProductsService } from './products.service';
   providedIn: 'root'
 })
 export class WishlistService {
-  private wishlistSubject = new BehaviorSubject<Products[]>([]);
-  wishlist$ = this.wishlistSubject.asObservable();
+  //private wishlistSubject = new BehaviorSubject<Products[]>([]);
+  //wishlist$ = this.wishlistSubject.asObservable();
 
   constructor(private firestore: AngularFirestore, private authService: AuthService, private productService: ProductsService) { }
 
@@ -81,7 +81,6 @@ export class WishlistService {
     return this.authService.getCurrentUser().pipe(
       switchMap(user => {
         if (user) {
-          // Retrieve wishlist for the authenticated user using user.uid
           return this.firestore.collection('users').doc(user.uid).valueChanges();
         } else {
           return of(null);
@@ -91,7 +90,6 @@ export class WishlistService {
         if (userData?.wishlist) {
           const productIds = userData.wishlist;
 
-          // Map over each product ID to get its details.
           const productObservables = productIds.map((productId: string) => {
             return this.productService.getProductById(productId);
           });
