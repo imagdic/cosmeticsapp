@@ -11,13 +11,13 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss']
 })
-export class ProductDetailsComponent implements OnInit{
+export class ProductDetailsComponent implements OnInit {
   product: Products | undefined;
   averageRatings: { [key: string]: number | null } = {};
 
-  
-  constructor(private activatedRoute: ActivatedRoute, private productService: ProductsService, 
-    private ratingService: RatingService, private wishlistService: WishlistService, private authService: AuthService) {
+
+  constructor(private activatedRoute: ActivatedRoute, private productService: ProductsService,
+    private ratingService: RatingService) {
   }
 
   ngOnInit(): void {
@@ -31,11 +31,11 @@ export class ProductDetailsComponent implements OnInit{
     });
   }
 
-  handleRatingChange(productId: string, newRatingValue: number): void {
-    console.log(`Product with ID: ${productId} received a new rating of ${newRatingValue}`);
-    this.ratingService.getAverageProductRating(productId).subscribe(avgRating => {
-        this.averageRatings[productId] = avgRating;
-    });
-}
-  
+  // handleRatingChange(productId: string, newRatingValue: number): void {
+  //   console.log(`Product with ID: ${productId} received a new rating of ${newRatingValue}`);
+  //   this.ratingService.getAverageProductRating(productId).subscribe(avgRating => {
+  //     this.averageRatings[productId] = avgRating;
+  //   });
+  // }
+
 }

@@ -54,12 +54,12 @@ export class HomeComponent implements OnInit {
   updateDisplayedProducts() {
     this.displayedProducts = this.products.slice(this.first, this.first + this.rows);
   }
-  
-  handleRatingChange(productId: string, newRatingValue: number): void {
-    console.log(`Product with ID: ${productId} received a new rating of ${newRatingValue}`);
-    this.ratingService.getAverageProductRating(productId).subscribe(avgRating => {
-        this.averageRatings[productId] = avgRating;
-    });
-}
+
+  // handleRatingChange(productId: string, newRatingValue: number): void {
+  //   console.log(`Product with ID: ${productId} received a new rating of ${newRatingValue}`);
+  //   this.ratingService.getAverageProductRating(productId).subscribe(avgRating => {
+  //     this.averageRatings[productId] = avgRating;
+  //   });
+  // }
 
 }

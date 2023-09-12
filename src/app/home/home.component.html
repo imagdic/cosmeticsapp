@@ -2,13 +2,13 @@
 <div class="intro-section">
     <h1>Welcome to Croatian Cosmetics app!</h1>
     <p>Discover, review, and create your perfect skincare and beauty routine from the best of Croatian cosmetics.</p>
-    
+
     <div class="features">
         <div class="feature">
             <i class="pi pi-search" style="font-size: 2rem"></i>
             <h3>Discover Croatian Cosmetics</h3>
             <p>Explore a diverse range of Croatian skincare, makeup, and more.</p>
-    
+
         </div>
         <div class="feature">
             <i class="pi pi-comments" style="font-size: 2rem"></i>
@@ -33,10 +33,11 @@
             </div>
             <div class="favorite">
                 <app-wishlist-button [product]="product"></app-wishlist-button>
-             </div>
-             <div class="star">
-                <app-rating [productId]="product.id" (ratingChange)="handleRatingChange(product.id, $event)"></app-rating>
-            </div>                  
+            </div>
+            <div class="star">
+                <app-rating [productId]="product.id"
+                    ></app-rating>
+            </div>
             <div class="product-item-footer">
                 <div class="category">{{product.brand}} | {{product.category}}
                 </div>
@@ -46,7 +47,8 @@
     </li>
 </ul>
 <div class="card flex justify-content-center">
-<p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="products.length" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
+    <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="products.length"
+        [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
 </div>
 
 <!-- {{products | json}} -->

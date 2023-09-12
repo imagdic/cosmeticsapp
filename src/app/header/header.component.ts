@@ -41,8 +41,6 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-
-
   setMenuItems(isAuthenticated: boolean): void {
     if (isAuthenticated) {
       this.items = [
@@ -116,7 +114,6 @@ export class HeaderComponent implements OnInit {
       this.productsForDropdown = [];
     }
   }
-
 
   onProductSelect(product: any): void {
     this.selectedProduct = product;

@@ -15,7 +15,7 @@ export class CategoryComponent implements OnInit {
   categoryName: string | null = null;
   averageRatings: { [key: string]: number | null } = {};
 
-  constructor(private route: ActivatedRoute, private productsService: ProductsService, private authService: AuthService,
+  constructor(private route: ActivatedRoute, private productsService: ProductsService,
     private ratingService: RatingService, private router: Router) { }
 
   ngOnInit() {
@@ -24,7 +24,6 @@ export class CategoryComponent implements OnInit {
       this.fetchProductsByCategory(this.categoryName);
     });
   }
-
 
   fetchProductsByCategory(category: string | null) {
     if (category) {
@@ -41,13 +40,12 @@ export class CategoryComponent implements OnInit {
     }
   }
   
-  
-  handleRatingChange(productId: string, newRatingValue: number): void {
-    console.log(`Product with ID: ${productId} received a new rating of ${newRatingValue}`);
-    this.ratingService.getAverageProductRating(productId).subscribe(avgRating => {
-        this.averageRatings[productId] = avgRating;
-    });
-}
+//   handleRatingChange(productId: string, newRatingValue: number): void {
+//     console.log(`Product with ID: ${productId} received a new rating of ${newRatingValue}`);
+//     this.ratingService.getAverageProductRating(productId).subscribe(avgRating => {
+//         this.averageRatings[productId] = avgRating;
+//     });
+// }
 
   viewProductDetails(productId: string) {
     this.router.navigate(['/products', productId]);
