@@ -19,14 +19,6 @@ export class LoginComponent {
   constructor(private authService: AuthService, private fb: FormBuilder, private router: Router) { }
   ngOnInit(): void {}
 
-  loginWithGoogle(){
-    this.authService.loginWithGoogle().then((res: any) =>{
-      this.router.navigateByUrl('/')
-    }).catch((error: any) =>{
-      console.error(error);
-    })
-  }
-
   loginWithEmail() {
     const email = this.loginForm.value.email!;
     const password = this.loginForm.value.password!;

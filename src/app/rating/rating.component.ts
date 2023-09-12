@@ -9,7 +9,6 @@ import { RatingService } from '../services/rating.service';
 })
 export class RatingComponent implements OnInit {
   @Input() productId!: string;
-  @Output() ratingChange = new EventEmitter<number>();
 
   averageRating: number | null = null;
   userRating: number | null = null;

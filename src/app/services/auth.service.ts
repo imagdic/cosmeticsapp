@@ -16,11 +16,6 @@ export class AuthService {
   constructor(private fireauth: AngularFireAuth, private router: Router, private firestoreService: FirestoreService,
     private firestore: AngularFirestore) { }
 
-  //login with Google
-  loginWithGoogle() {
-    return this.fireauth.signInWithPopup(new GoogleAuthProvider());
-  }
-
   //login method
   login(user: { email: string, password: string }): Promise<void> {
     return this.fireauth.signInWithEmailAndPassword(user.email, user.password)
@@ -43,7 +38,7 @@ export class AuthService {
           // Add the user to the 'users' collection
           this.firestoreService.addUserToFirestore(user.uid, userData);
 
-          // Create an empty wishlist subcollection for the user
+          // Create an empty wishlist array for the user
           this.createEmptyWishlist(user.uid);
 
         } else {
