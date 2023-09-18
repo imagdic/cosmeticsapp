@@ -16,7 +16,7 @@
         <small class="p-error block" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.dirty">Password is required</small> 
 
         <div class="flex align-items-center justify-content-between mb-6">
-            <a class="font-medium no-underline ml-3 text-blue-600 text-right cursor-pointer">Forgot password?</a>
+            <!--<a class="font-medium no-underline ml-3 text-blue-600 text-right cursor-pointer">Forgot password?</a>-->
         </div>
 
         <button (click)="loginWithEmail()" pButton pRipple label="Login" icon="pi pi-user" class="w-full py-2" [disabled]="loginForm.invalid"></button>
